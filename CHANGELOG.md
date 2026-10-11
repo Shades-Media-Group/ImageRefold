@@ -6,6 +6,10 @@ All notable changes to ImageRefold are recorded here. The format follows
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-12
+
+The first public version of the Figma plugin: export, optimise and import, with a simpler panel that opens light.
+
 ### Added
 
 - **Settings** behind the gear: theme (Light, Dark or Automatic), file names, one ZIP or separate files, lossless WebP and AVIF, and Reset all preferences. Every choice is remembered between runs.

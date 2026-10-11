@@ -1,6 +1,6 @@
 {
   "name": "imagerefold",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Compress, convert and export images from Figma, and bring images back in already optimised. A free, open-source Figma plugin.",
   "license": "MIT",

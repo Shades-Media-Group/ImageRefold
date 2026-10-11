@@ -52,7 +52,7 @@ Made by Shades Media Group.
 - **Free forever:** no payments, tiers, limits, trials, upgrade prompts or watermarks.
 - **Local only:** `networkAccess.allowedDomains: ["none"]`. No backend, no analytics.
 - **Licence:** MIT © Shades Media Group. The name and logo are reserved (TRADEMARKS.md).
-- **Version:** 0.1.0, in development. Not yet in the Figma Community.
+- **Version:** 0.2.0, submitted to the Figma Community (in review).
 
 **Platform limits**
 
