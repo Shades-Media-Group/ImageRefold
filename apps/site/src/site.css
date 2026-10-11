@@ -1016,9 +1016,6 @@ code {
   color: var(--ink-3);
   font-size: 15px;
 }
-.try:not(.has-image) .compare-stage img {
-  visibility: hidden;
-}
 
 /* Features: one hairline row each, the name beside what it does. */
 .features {

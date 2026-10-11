@@ -38,7 +38,7 @@
       "lead": "Export any layer as WebP, AVIF, JPG or PNG, see the file size before you save, and bring images back into Figma already compressed. Free, open source, and nothing leaves your computer.",
       "try": "Try it on an image",
       "github": "Follow on GitHub",
-      "note": "The Figma plugin is in development. Watch the repository to hear when the first release is out."
+      "note": "The Figma plugin is in development and runs from source today. Watch the repository to hear when it reaches the Figma Community."
     },
     "try": {
       "title": "Try it on your own image.",
@@ -63,7 +63,7 @@
       "text": "Pick the layers, pick the format, see the size. Then export them all at once, named the way your project needs.",
       "formats": {
         "title": "WebP, AVIF, JPG and PNG",
-        "text": "Lossy or lossless, with one quality control that means the same thing in every format."
+        "text": "Lossy or lossless, with one quality slider for every format."
       },
       "preview": {
         "title": "The size before you save",
@@ -71,7 +71,7 @@
       },
       "scale": {
         "title": "Every size at once",
-        "text": "0.5×, 1×, 2×, 3× or an exact width, several in one export."
+        "text": "0.5×, 0.75×, 1×, 1.5×, 2×, 3×, 4× or an exact width, several in one export."
       },
       "batch": {
         "title": "Whole selections",
@@ -82,8 +82,8 @@
         "text": "Drop images into Figma already light, or replace heavy image fills in place."
       },
       "file": {
-        "title": "Settings that stay",
-        "text": "Your formats and presets are remembered for each file."
+        "title": "A lighter Figma file",
+        "text": "Images larger than they are shown are swapped for lighter copies, in one undo step."
       }
     },
     "privacy": {

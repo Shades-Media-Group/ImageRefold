@@ -7,7 +7,7 @@
 - Status: in development. The first release will be published in the Figma Community.
 - Price: free forever. No plans, limits, trials, accounts, upgrade prompts or watermarks. MIT licence.
 - Formats: WebP, AVIF, JPG and PNG, lossy or lossless, with one quality control.
-- Sizes: 0.5×, 1×, 2×, 3× or an exact width, several in one export.
+- Sizes: 0.5×, 0.75×, 1×, 1.5×, 2×, 3×, 4× or an exact width, several in one export.
 - Preview: each file's size and saving before it is saved, with the original beside the result.
 - Batches: every selected layer at once, as separate files or one ZIP, named by a pattern.
 - Import: images dropped into the plugin are compressed before they are placed; heavy image fills can be replaced in place to make a Figma file smaller.
