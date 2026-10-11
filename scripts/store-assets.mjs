@@ -46,7 +46,8 @@ async function capture(file, { theme = 'light', tab, settings }) {
   })
   await page.addInitScript(
     (saved) => localStorage.setItem('settings', JSON.stringify(saved)),
-    settings,
+    // The panel's own theme setting picks light or dark.
+    { ...settings, theme },
   )
   await page.goto(
     `${origin}/apps/figma-plugin/harness.html${theme === 'dark' ? '?theme=dark' : ''}`,
@@ -70,11 +71,12 @@ async function capture(file, { theme = 'light', tab, settings }) {
 }
 
 const exportSettings = {
+  theme: 'light',
   format: 'webp',
   quality: 80,
   lossless: false,
   scales: [1, 2],
-  width: null,
+  widths: [],
   pattern: '{name}{@size}',
   zip: true,
 }
