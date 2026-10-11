@@ -1,5 +1,5 @@
 import {
-  DEFAULT_SETTINGS,
+  migrateSettings,
   type Layer,
   type MainToUi,
   type PlacedImage,
@@ -209,7 +209,7 @@ figma.ui.onmessage = async (message: UiToMain) => {
 
 async function start() {
   const saved = (await figma.clientStorage.getAsync(SETTINGS_KEY)) as Partial<Settings> | undefined
-  send({ type: 'ready', settings: { ...DEFAULT_SETTINGS, ...saved }, version: __VERSION__ })
+  send({ type: 'ready', settings: migrateSettings(saved ?? {}), version: __VERSION__ })
   sendSelection()
 }
 

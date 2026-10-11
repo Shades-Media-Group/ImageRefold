@@ -1,32 +1,18 @@
-import type { ComponentChildren } from 'preact'
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'preact/hooks'
 import { zipSync } from 'fflate'
-import {
-  Button,
-  CREDIT,
-  IconButton,
-  Logo,
-  Message,
-  Progress,
-  REPO_URL,
-  Section,
-  Segmented,
-  Tabs,
-  Toggle,
-} from './kit'
+import { Button, Icon, IconButton, Logo, Message, Progress, REPO_URL, Tabs } from './kit'
 import {
   DEFAULT_SETTINGS,
-  SCALES,
-  type Format,
   type Layer,
   type MainToUi,
   type PlacedImage,
   type Settings,
   type Size,
-  type UiToMain,
 } from '../shared/messages'
 import { fileName, formatBytes, saving, sizeToken, uniqueNames, zipName } from '../shared/naming'
 import { Encoder } from './encoding'
+import { MIME, openUrl, send, SHOWN_DENSITY, type Output } from './bridge'
+import { ExportView, ImportView, OptimiseView, SettingsView, TitleBar } from './views'
 
 type Tab = 'export' | 'optimise' | 'import'
 
@@ -36,31 +22,9 @@ const TABS: { value: Tab; label: string }[] = [
   { value: 'import', label: 'Import' },
 ]
 
-const FORMATS: { value: Format; label: string }[] = [
-  { value: 'webp', label: 'WebP' },
-  { value: 'avif', label: 'AVIF' },
-  { value: 'jpeg', label: 'JPG' },
-  { value: 'png', label: 'PNG' },
-]
-
 /** Figma holds images up to 4096 px on a side. */
 const FIGMA_MAX = 4096
-/** Optimise keeps twice the largest shown size, for sharp results on high-density screens. */
-const SHOWN_DENSITY = 2
-
-const send = (message: UiToMain) => parent.postMessage({ pluginMessage: message }, '*')
-const openUrl = (url: string) => send({ type: 'open-url', url })
 const encoder = new Encoder()
-
-/** One file the export will write: a layer at one size. */
-interface Output {
-  key: string
-  layer: Layer
-  size: Size
-  png?: Uint8Array
-  result?: { bytes: Uint8Array; width: number; height: number }
-  error?: string
-}
 
 function download(name: string, bytes: Uint8Array, type: string) {
   const url = URL.createObjectURL(new Blob([bytes as BlobPart], { type }))
@@ -71,20 +35,16 @@ function download(name: string, bytes: Uint8Array, type: string) {
   setTimeout(() => URL.revokeObjectURL(url), 10_000)
 }
 
-const MIME: Record<Format, string> = {
-  webp: 'image/webp',
-  avif: 'image/avif',
-  jpeg: 'image/jpeg',
-  png: 'image/png',
-}
-
 const sizesOf = (settings: Settings): Size[] => [
   ...settings.scales.map((value): Size => ({ kind: 'scale', value })),
-  ...(settings.width ? [{ kind: 'width', value: settings.width } as Size] : []),
+  ...settings.widths.map((value): Size => ({ kind: 'width', value })),
 ]
+
+type Report = { tone: 'success' | 'info' | 'error'; text: string }
 
 export function App() {
   const [tab, setTab] = useState<Tab>('export')
+  const [view, setView] = useState<'main' | 'settings'>('main')
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS)
   const [version, setVersion] = useState('')
   const [layers, setLayers] = useState<Layer[]>([])
@@ -95,9 +55,7 @@ export function App() {
     null,
   )
   const [work, setWork] = useState<{ label: string; progress: number } | null>(null)
-  const [report, setReport] = useState<{ tone: 'success' | 'info' | 'error'; text: string } | null>(
-    null,
-  )
+  const [report, setReport] = useState<Report | null>(null)
   const [dragging, setDragging] = useState(false)
   const [fill, setFill] = useState(true)
   const job = useRef(0)
@@ -115,6 +73,11 @@ export function App() {
     setSettings(merged)
     send({ type: 'settings', settings: merged })
   }
+
+  // The theme: light unless chosen otherwise; 'auto' follows the class Figma puts on <html>.
+  useLayoutEffect(() => {
+    document.documentElement.dataset.theme = settings.theme
+  }, [settings.theme])
 
   /** Encodes one output with the current settings; PNG never comes out larger than Figma's own. */
   const encodeOne = async (output: Pick<Output, 'key' | 'png'>, run: number) => {
@@ -146,6 +109,7 @@ export function App() {
       if (!message) return
       switch (message.type) {
         case 'ready':
+          settingsRef.current = message.settings
           setSettings(message.settings)
           setVersion(message.version)
           break
@@ -188,7 +152,7 @@ export function App() {
   }, [])
 
   // A new selection or new sizes: render every layer at every size.
-  const sizes = useMemo(() => sizesOf(settings), [settings.scales, settings.width])
+  const sizes = useMemo(() => sizesOf(settings), [settings.scales, settings.widths])
   useEffect(() => {
     if (tab !== 'export') return
     // The job number keeps renders from an older selection out; encodes stay valid,
@@ -221,11 +185,11 @@ export function App() {
 
   // Optimise looks at the selection, or the page when nothing is selected.
   useEffect(() => {
-    if (tab !== 'optimise') return
+    if (tab !== 'optimise' || view !== 'main') return
     setScan(null)
     setReport(null)
     send({ type: 'scan' })
-  }, [tab, layers])
+  }, [tab, layers, view])
 
   const names = useMemo(
     () =>
@@ -252,8 +216,7 @@ export function App() {
       .map((o, i) => ({ name: names[i]!, output: o }))
       .filter(({ output }) => output.result)
     if (!files.length) return
-    const zip = settings.zip && files.length > 1
-    if (zip) {
+    if (settings.zip && files.length > 1) {
       const archive = zipSync(
         Object.fromEntries(files.map(({ name, output }) => [name, output.result!.bytes])),
         { level: 0 },
@@ -320,6 +283,7 @@ export function App() {
   const runImport = async (files: File[]) => {
     const images = files.filter((f) => f.type.startsWith('image/'))
     if (!images.length) return
+    setView('main')
     setTab('import')
     setReport(null)
     const ready: { name: string; bytes: Uint8Array; width: number; height: number }[] = []
@@ -366,7 +330,15 @@ export function App() {
       })
   }
 
-  const feedbackUrl = `${REPO_URL}/issues/new?template=feature.yml&version=${version}`
+  const exportLabel = pending
+    ? `Encoding ${outputs.length - pending} of ${outputs.length}`
+    : !done.length
+      ? 'Nothing to export'
+      : done.length === 1
+        ? `Download ${names[outputs.indexOf(done[0]!)]!.split('/').pop()}`
+        : settings.zip
+          ? `Download ${done.length} files as ZIP`
+          : `Download ${done.length} files`
 
   return (
     <div
@@ -385,18 +357,98 @@ export function App() {
       <header class="ir-header">
         <Logo height={15} />
         <div class="ir-header__actions">
-          <IconButton icon="feedback" label="Send feedback" onClick={() => openUrl(feedbackUrl)} />
           <IconButton icon="help" label="Help" onClick={() => openUrl(`${REPO_URL}#readme`)} />
+          <IconButton
+            icon="settings"
+            label="Settings"
+            aria-pressed={view === 'settings'}
+            onClick={() => setView(view === 'settings' ? 'main' : 'settings')}
+          />
         </div>
       </header>
-      <Tabs
-        value={tab}
-        onChange={(next) => {
-          setReport(null)
-          setTab(next)
-        }}
-        options={TABS}
-      />
+
+      {view === 'settings' ? (
+        <>
+          <TitleBar title="Settings" onBack={() => setView('main')} />
+          <main class="scroll">
+            <SettingsView
+              settings={settings}
+              version={version}
+              onChange={save}
+              onReset={() => {
+                settingsRef.current = DEFAULT_SETTINGS
+                setSettings(DEFAULT_SETTINGS)
+                send({ type: 'settings', settings: DEFAULT_SETTINGS })
+              }}
+            />
+          </main>
+        </>
+      ) : (
+        <>
+          <Tabs
+            value={tab}
+            onChange={(next) => {
+              setReport(null)
+              setTab(next)
+            }}
+            options={TABS}
+          />
+
+          <main class="scroll">
+            {tab === 'export' && (
+              <ExportView
+                outputs={outputs}
+                names={names}
+                focus={focus}
+                onFocus={setFocus}
+                settings={settings}
+                onChange={save}
+                totals={{ before: totalBefore, after: totalAfter, pending }}
+              />
+            )}
+            {tab === 'optimise' && <OptimiseView scan={scan} />}
+            {tab === 'import' && (
+              <ImportView
+                fillable={fillable}
+                fill={fill}
+                onFill={setFill}
+                onChoose={() => fileInput.current?.click()}
+              />
+            )}
+            {report && (
+              <div class="report">
+                <Message tone={report.tone} onDismiss={() => setReport(null)}>
+                  {report.text}
+                </Message>
+              </div>
+            )}
+          </main>
+
+          {work ? (
+            <footer class="dock dock--work">
+              <Progress value={work.progress} />
+              <p class="working">
+                <span class="ir-spinner" /> {work.label}
+              </p>
+            </footer>
+          ) : tab === 'export' && outputs.length ? (
+            <footer class="dock">
+              <Button variant="primary" size="lg" block disabled={!done.length} onClick={runExport}>
+                <span class="truncate">{exportLabel}</span>
+                {done.length > 0 && !pending && (
+                  <span class="dock__size num">{formatBytes(totalAfter)}</span>
+                )}
+              </Button>
+            </footer>
+          ) : tab === 'optimise' && scan?.images.length ? (
+            <footer class="dock">
+              <Button variant="primary" size="lg" block onClick={() => void runOptimise()}>
+                Compress {scan.images.length} {scan.images.length === 1 ? 'image' : 'images'}
+              </Button>
+            </footer>
+          ) : null}
+        </>
+      )}
 
       <input
         ref={fileInput}
@@ -410,438 +462,12 @@ export function App() {
         }}
       />
 
-      <main class="scroll">
-        {tab === 'export' &&
-          (outputs.length ? (
-            <ExportView
-              outputs={outputs}
-              names={names}
-              focus={focus}
-              onFocus={setFocus}
-              settings={settings}
-              onChange={save}
-              totals={{ before: totalBefore, after: totalAfter, pending }}
-            />
-          ) : (
-            <Intro
-              title="Select layers to export"
-              text="Select frames, groups or images on the canvas. Each file's size shows here before you save it."
-              facts={[
-                'WebP, AVIF, JPG and PNG, encoded on your computer',
-                'Any size from 0.5× to 4×, or an exact width',
-                'Separate files or one ZIP, named your way',
-              ]}
-            />
-          ))}
-
-        {tab === 'optimise' &&
-          (scan === null ? (
-            <p class="working">
-              <span class="ir-spinner" /> Looking for images
-            </p>
-          ) : scan.images.length ? (
-            <OptimiseView scan={scan} />
-          ) : (
-            <Intro
-              title="No images here"
-              text={
-                scan.scope === 'selection'
-                  ? 'The selected layers have no image fills. Select other layers, or nothing to check the whole page.'
-                  : 'This page has no image fills to compress.'
-              }
-            />
-          ))}
-
-        {tab === 'import' && (
-          <Intro
-            title="Bring images in, already light"
-            text="Drop or choose PNG, JPG, GIF, WebP or AVIF files. Each is compressed before it lands, and shrunk to fit Figma's 4096 px limit."
-            action={
-              <Button icon="upload" onClick={() => fileInput.current?.click()}>
-                Choose images
-              </Button>
-            }
-          >
-            {fillable > 0 && (
-              <Toggle
-                checked={fill}
-                onChange={setFill}
-                label="Fill the selected layers"
-                hint={`Uses the first image as the fill of ${fillable} selected ${fillable === 1 ? 'layer' : 'layers'}.`}
-              />
-            )}
-          </Intro>
-        )}
-
-        {report && (
-          <Section>
-            <Message tone={report.tone} onDismiss={() => setReport(null)}>
-              {report.text}
-            </Message>
-          </Section>
-        )}
-
-        <p class="credit">
-          Free and open source. Built by{' '}
-          <a
-            href={CREDIT.url}
-            onClick={(e) => {
-              e.preventDefault()
-              openUrl(CREDIT.url)
-            }}
-          >
-            {CREDIT.company}
-          </a>
-          . Your images never leave this computer.{version && <span class="num"> v{version}</span>}
-        </p>
-      </main>
-
-      {work ? (
-        <footer class="dock dock--work">
-          <Progress value={work.progress} />
-          <p class="working">
-            <span class="ir-spinner" /> {work.label}
-          </p>
-        </footer>
-      ) : tab === 'export' && outputs.length ? (
-        <footer class="dock">
-          <Button variant="primary" size="lg" block disabled={!done.length} onClick={runExport}>
-            {pending
-              ? `Encoding ${outputs.length - pending} of ${outputs.length}`
-              : !done.length
-                ? 'Nothing to export'
-                : done.length === 1
-                  ? `Download ${names[outputs.indexOf(done[0]!)]!.split('/').pop()} · ${formatBytes(totalAfter)}`
-                  : settings.zip
-                    ? `Download ZIP of ${done.length} · ${formatBytes(totalAfter)}`
-                    : `Download ${done.length} files · ${formatBytes(totalAfter)}`}
-          </Button>
-        </footer>
-      ) : tab === 'optimise' && scan?.images.length ? (
-        <footer class="dock">
-          <Button variant="primary" size="lg" block onClick={() => void runOptimise()}>
-            Compress {scan.images.length} {scan.images.length === 1 ? 'image' : 'images'}
-          </Button>
-        </footer>
-      ) : null}
-
       {dragging && (
         <div class="drop" aria-hidden="true">
-          Drop images to compress and place them
+          <Icon name="upload" size={20} />
+          Drop to compress and place
         </div>
       )}
     </div>
-  )
-}
-
-function Intro({
-  title,
-  text,
-  facts,
-  action,
-  children,
-}: {
-  title: string
-  text: string
-  facts?: string[]
-  action?: ComponentChildren
-  children?: ComponentChildren
-}) {
-  return (
-    <>
-      <div class="intro">
-        <h1>{title}</h1>
-        <p>{text}</p>
-        {action}
-      </div>
-      {children && <Section>{children}</Section>}
-      {facts && (
-        <Section title="What it does">
-          <ul class="facts">
-            {facts.map((fact) => (
-              <li>{fact}</li>
-            ))}
-          </ul>
-        </Section>
-      )}
-    </>
-  )
-}
-
-function ExportView({
-  outputs,
-  names,
-  focus,
-  onFocus,
-  settings,
-  onChange,
-  totals,
-}: {
-  outputs: Output[]
-  names: string[]
-  focus: string
-  onFocus: (key: string) => void
-  settings: Settings
-  onChange: (next: Partial<Settings> | ((current: Settings) => Partial<Settings>)) => void
-  totals: { before: number; after: number; pending: number }
-}) {
-  const focused = outputs.find((o) => o.key === focus) ?? outputs[0]
-  const lossy = settings.format !== 'png' && !(settings.lossless && settings.format !== 'jpeg')
-  const [width, setWidth] = useState(settings.width ? String(settings.width) : '')
-
-  return (
-    <>
-      <Preview output={focused} format={settings.format} />
-
-      <Section
-        title="Files"
-        aside={
-          <span class="num">
-            {outputs.length}
-            {totals.after > 0 && ` · ${formatBytes(totals.after)}`}
-            {totals.before > 0 && !totals.pending && ` · ${saving(totals.before, totals.after)}`}
-          </span>
-        }
-      >
-        <ul class="files">
-          {outputs.map((o, i) => (
-            <li>
-              <button
-                type="button"
-                class="file"
-                aria-pressed={o.key === focused?.key}
-                onClick={() => onFocus(o.key)}
-                title={o.result ? `${o.result.width} × ${o.result.height} px` : undefined}
-              >
-                <span class="truncate">{names[i]}</span>
-                {o.error ? (
-                  <span class="file__error">Failed</span>
-                ) : o.result ? (
-                  <span class="num">
-                    {formatBytes(o.result.bytes.length)}{' '}
-                    <span class={o.result.bytes.length > o.png!.length ? 'file__larger' : 'muted'}>
-                      {saving(o.png!.length, o.result.bytes.length)}
-                    </span>
-                  </span>
-                ) : (
-                  <span class="ir-spinner muted" aria-label="Encoding" />
-                )}
-              </button>
-            </li>
-          ))}
-        </ul>
-        {outputs.some((o) => o.error) && (
-          <Message tone="warning">{outputs.find((o) => o.error)!.error}</Message>
-        )}
-      </Section>
-
-      <Section title="Format">
-        <Segmented
-          label="Format"
-          value={settings.format}
-          options={FORMATS}
-          onChange={(format) => onChange({ format })}
-        />
-        {lossy && (
-          <label class="ir-prop">
-            <span>Quality</span>
-            <span class="range">
-              <input
-                type="range"
-                min={1}
-                max={100}
-                value={settings.quality}
-                onInput={(e) => onChange({ quality: Number(e.currentTarget.value) })}
-              />
-              <output class="num">{settings.quality}</output>
-            </span>
-          </label>
-        )}
-        {(settings.format === 'webp' || settings.format === 'avif') && (
-          <Toggle
-            checked={settings.lossless}
-            onChange={(lossless) => onChange({ lossless })}
-            label="Lossless"
-            hint="Every pixel kept exactly. Larger files."
-          />
-        )}
-        {settings.format === 'png' && (
-          <p class="hint">PNG stays lossless and is never larger than Figma's own export.</p>
-        )}
-      </Section>
-
-      <Section title="Size">
-        <Segmented
-          label="Scales"
-          value={settings.scales}
-          options={SCALES.map((value) => ({ value, label: `${value}×` }))}
-          onChange={(scale) =>
-            onChange((current) => {
-              const scales = current.scales.includes(scale)
-                ? current.scales.filter((s) => s !== scale)
-                : [...current.scales, scale].sort((a, b) => a - b)
-              // Keep at least one size.
-              return scales.length || current.width ? { scales } : {}
-            })
-          }
-        />
-        <label class="ir-prop">
-          <span>Width</span>
-          <input
-            class="ir-input num"
-            type="number"
-            min={1}
-            max={16384}
-            placeholder="Exact width in px, optional"
-            value={width}
-            onInput={(e) => setWidth(e.currentTarget.value)}
-            onChange={(e) => {
-              const value = Math.round(Number(e.currentTarget.value))
-              const next = value > 0 ? Math.min(value, 16384) : null
-              if (next || settings.scales.length) onChange({ width: next })
-              setWidth(next ? String(next) : '')
-            }}
-          />
-        </label>
-      </Section>
-
-      <Section title="Output">
-        <label class="ir-prop">
-          <span>Name</span>
-          <input
-            class="ir-input"
-            value={settings.pattern}
-            spellcheck={false}
-            onChange={(e) =>
-              onChange({ pattern: e.currentTarget.value || DEFAULT_SETTINGS.pattern })
-            }
-          />
-        </label>
-        <p class="hint">
-          {'{name}'} the layer, {'{@size}'} @2x except at 1×, {'{size}'}, {'{width}'}, {'{height}'}.
-          A slash makes a folder in the ZIP.
-        </p>
-        {outputs.length > 1 && (
-          <div class="ir-prop">
-            <span>Save as</span>
-            <Segmented
-              label="Save as"
-              value={settings.zip ? 'zip' : 'files'}
-              options={[
-                { value: 'zip', label: 'One ZIP' },
-                { value: 'files', label: 'Separate files' },
-              ]}
-              onChange={(value) => onChange({ zip: value === 'zip' })}
-            />
-          </div>
-        )}
-      </Section>
-    </>
-  )
-}
-
-/** The chosen file on the stage, whole or at 100%. Hold Compare to see Figma's original. */
-function Preview({ output, format }: { output?: Output; format: Format }) {
-  const [original, setOriginal] = useState(false)
-  const [zoom, setZoom] = useState<'fit' | 'actual'>('fit')
-  const bytes = original ? output?.png : output?.result?.bytes
-  const url = useMemo(
-    () =>
-      bytes
-        ? URL.createObjectURL(
-            new Blob([bytes as BlobPart], { type: original ? 'image/png' : MIME[format] }),
-          )
-        : '',
-    [bytes],
-  )
-  useEffect(() => () => URL.revokeObjectURL(url), [url])
-  const hold = (on: boolean) => () => setOriginal(on)
-  return (
-    <>
-      <div class={`preview preview--${zoom}`}>
-        {url ? (
-          <img src={url} alt="" />
-        ) : output?.error ? (
-          <p class="muted">No preview: this file could not be made.</p>
-        ) : (
-          <span class="ir-spinner muted" />
-        )}
-      </div>
-      <div class="preview-bar">
-        <span class="muted num truncate">
-          {original ? 'Original' : 'Result'}
-          {output?.result && ` · ${output.result.width} × ${output.result.height}`}
-        </span>
-        <Segmented
-          label="Zoom"
-          value={zoom}
-          options={[
-            { value: 'fit', label: 'Fit' },
-            { value: 'actual', label: '100%' },
-          ]}
-          onChange={setZoom}
-        />
-        <button
-          type="button"
-          class="text-button"
-          disabled={!output?.result}
-          onPointerDown={hold(true)}
-          onPointerUp={hold(false)}
-          onPointerLeave={hold(false)}
-          onKeyDown={(e) => e.key === ' ' && setOriginal(true)}
-          onKeyUp={hold(false)}
-        >
-          Compare
-        </button>
-      </div>
-    </>
-  )
-}
-
-function OptimiseView({ scan }: { scan: { images: PlacedImage[]; scope: 'selection' | 'page' } }) {
-  const total = scan.images.reduce((sum, image) => sum + image.bytes.length, 0)
-  return (
-    <>
-      <div class="intro">
-        <h1>Make this file lighter</h1>
-        <p>
-          Each image is shrunk to twice the largest size it is shown at, then compressed. Images
-          that would not get smaller stay as they are.
-        </p>
-      </div>
-      <Section
-        title={scan.scope === 'selection' ? 'Images in the selection' : 'Images on this page'}
-        aside={
-          <span class="num">
-            {scan.images.length} · {formatBytes(total)}
-          </span>
-        }
-      >
-        <ul class="files">
-          {scan.images.map((image) => {
-            const shrinks =
-              image.width > image.shownWidth * SHOWN_DENSITY ||
-              image.height > image.shownHeight * SHOWN_DENSITY
-            return (
-              <li class="file" title={`Shown at most ${image.shownWidth} × ${image.shownHeight}`}>
-                <span class="truncate">
-                  {image.name}
-                  {image.uses > 1 && <span class="muted"> ×{image.uses}</span>}
-                </span>
-                <span class="num">
-                  <span class={shrinks ? 'file__larger' : 'muted'}>
-                    {image.width} × {image.height}
-                  </span>{' '}
-                  {formatBytes(image.bytes.length)}
-                </span>
-              </li>
-            )
-          })}
-        </ul>
-      </Section>
-      <Section>
-        <p class="hint">Sizes in red are larger than any layer shows them.</p>
-      </Section>
-    </>
   )
 }

@@ -1,3 +1,11 @@
+/*
+ * The ImageRefold panel. Gradient's grammar at Figma's density: pill controls,
+ * one red action, hairlines between zones and none inside them.
+ *
+ * Type: three sizes only. 11 px meta, 12 px body and controls, 20 px the figure.
+ * Space: 4 px steps; 16 px gutter; 12 px between rows; 20 px between zones.
+ */
+
 html,
 body,
 #root {
@@ -14,7 +22,6 @@ body,
   flex: none;
 }
 
-/* A column, so the credit can sit at the bottom edge of short screens. */
 .scroll {
   flex: 1;
   min-height: 0;
@@ -26,7 +33,17 @@ body,
   flex: none;
 }
 
-/* A title row in place of the tabs while reviewing, importing or in settings. */
+.meta {
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+/* Header and tabs: the logo, two icons; text tabs on one hairline. */
+.ir-header .ir-icon-button[aria-pressed='true'] {
+  background: var(--hover);
+  color: var(--ink);
+}
 .ir-tabs--title button {
   margin-left: -4px;
   color: var(--ink);
@@ -37,225 +54,112 @@ body,
   color: var(--ink-3);
 }
 
-.intro {
-  display: grid;
-  justify-items: start;
-  gap: 8px;
-  padding: 24px var(--pad) 20px;
+/* Gradient's controls: a pill track with a raised pill, pill chips, a pill action. */
+.ir-segmented {
+  height: 28px;
+  padding: 2px;
+  border-radius: 999px;
 }
-.keys {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 8px;
-}
-.keys .ir-keycap {
-  min-width: 32px;
-  height: 32px;
-  border-bottom-width: 3px;
-  border-radius: 6px;
-  font-size: 13px;
-}
-.intro h1 {
-  font: 600 15px/20px var(--font);
-  letter-spacing: -0.01em;
-}
-.intro p {
-  max-width: 34em;
-  color: var(--ink-2);
-  line-height: 18px;
-}
-.intro .ir-button {
-  margin-top: 4px;
-}
-.link {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 4px;
-  color: var(--ink);
-  font-weight: 500;
-}
-
-/* Plain lines of text, 24 px apart; no bullets. */
-.facts {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.facts li {
-  padding: 4px 0;
-  color: var(--ink-2);
-  line-height: 16px;
-}
-
-.working {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 var(--pad);
-  color: var(--ink-2);
-}
-
-.source h1 {
-  font: 600 13px/16px var(--font);
-}
-.source p {
-  margin-top: 4px;
-  font-size: 11px;
-  line-height: 16px;
-}
-.source--lead h1 {
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: -0.01em;
-}
-.source--lead p {
+.ir-segmented button {
+  border-radius: 999px;
   font-size: 12px;
 }
-.body {
-  color: var(--ink-2);
-  line-height: 18px;
+.ir-button--primary {
+  border-radius: 999px;
+  box-shadow:
+    0 1px 2px rgba(120, 0, 5, 0.18),
+    0 6px 14px -8px rgba(224, 0, 10, 0.55);
+}
+.ir-button--primary:disabled {
+  box-shadow: none;
+}
+.ir-input {
+  border-radius: 8px;
 }
 
-/* Review: the previewed frame, large and scrollable, on the stage. */
-.preview {
-  flex: none;
-  height: 232px;
-  padding: 12px;
-  overflow-y: auto;
-  background: var(--stage);
-  overscroll-behavior: contain;
-}
-.preview img {
-  display: block;
-  height: auto;
-  margin: 0 auto;
-  box-shadow: 0 0 0 1px var(--line-strong);
-}
-.preview-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  height: 40px;
-  padding: 0 12px 0 var(--pad);
-  background: var(--stage);
-  border-bottom: 1px solid var(--line);
-  font-weight: 600;
-}
-.preview-bar .num {
-  margin-left: 4px;
-  font-weight: 400;
-}
-.preview-bar .ir-segmented {
-  width: 112px;
-  flex: none;
-}
-.preview-bar + .ir-section {
-  border-top: 0;
-}
-/* Fit: the whole file, centred. 100%: its real pixels, scrolling both ways. */
-.preview {
+/* The stage: the chosen file, whole. Holding it shows Figma's original. */
+.stage {
+  position: relative;
   display: grid;
   place-items: center;
-  overflow: auto;
+  height: 208px;
+  margin: 12px var(--pad) 0;
+  padding: 12px;
+  border-radius: 12px;
+  background:
+    repeating-conic-gradient(var(--hover) 0 25%, transparent 0 50%) 0 0 / 16px 16px,
+    var(--stage);
+  overflow: hidden;
+  cursor: zoom-in;
+  user-select: none;
 }
-.preview--fit img {
+.stage img {
+  display: block;
   max-width: 100%;
-  /* The stage is 232 px with 12 px padding: a tall frame shows whole, as a strip. */
-  max-height: 208px;
+  max-height: 184px;
   width: auto;
   height: auto;
+  box-shadow: 0 1px 3px rgba(10, 10, 11, 0.16);
+  animation: ir-fade 240ms var(--ease) both;
 }
-.preview--actual {
-  place-items: start;
-}
-.preview--actual img {
-  max-width: none;
-}
-.preview-bar .text-button {
-  flex: none;
-}
-.preview .ir-spinner {
-  margin: 96px auto 0;
+.stage__tag {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--raised);
+  color: var(--ink-2);
+  font-size: 11px;
+  line-height: 16px;
+  box-shadow: 0 0 0 1px var(--line);
 }
 
-.dock {
-  flex: none;
+/* The figure: the one number that matters, then what it means. */
+.figure {
   display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 16px var(--pad) 4px;
+}
+.figure__value {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+}
+
+/* Rows: a label column and one control each, no boxes around them. */
+.rows {
+  display: grid;
+  gap: 12px;
+  padding: 12px var(--pad) 20px;
+}
+.rows + .rows {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
   align-items: center;
   gap: 8px;
-  padding: 12px var(--pad);
-  border-top: 1px solid var(--line);
+  min-height: 28px;
 }
-/* While working: the progress line on the hairline, the step under it. */
-.dock--work {
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0;
-  padding: 0;
+.row__label {
+  color: var(--ink-3);
+  font-size: 11px;
 }
-.dock--work .working {
-  height: 60px;
+.row__control {
+  min-width: 0;
 }
-
-.drop {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-content: center;
-  background: color-mix(in srgb, var(--bg) 90%, transparent);
-  box-shadow: inset 0 0 0 2px var(--ink);
-  font-weight: 600;
-  pointer-events: none;
-}
-
-/* Files: one 32 px row each, the name and its size; the chosen one is shown on the stage. */
-.files {
-  margin: 0 calc(var(--pad) * -1);
-  padding: 0;
-  list-style: none;
-}
-.file {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+.row__control > .ir-input {
   width: 100%;
-  min-height: var(--row);
-  padding: 0 var(--pad);
-  border: 0;
-  background: transparent;
-  color: var(--ink);
-  font: 400 12px/16px var(--font);
-  text-align: left;
-}
-button.file {
-  cursor: pointer;
-}
-button.file:hover {
-  background: var(--hover);
-}
-button.file[aria-pressed='true'] {
-  background: var(--hover);
-  font-weight: 600;
-}
-.file > .num {
-  flex: none;
-}
-.file__larger {
-  color: var(--red-text);
-}
-.file__error {
-  flex: none;
-  color: var(--error);
 }
 
-/* Quality: the slider and its value. */
 .range {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 28px;
+  grid-template-columns: minmax(0, 1fr) 24px;
   align-items: center;
   gap: 8px;
 }
@@ -267,24 +171,240 @@ button.file[aria-pressed='true'] {
 .range output {
   text-align: right;
 }
-.ir-section .ir-segmented + .ir-prop,
-.ir-section .ir-prop + .ir-segmented {
-  margin-top: 8px;
-}
-.ir-section > .ir-segmented {
-  margin-bottom: 4px;
-}
-.ir-section .hint + .ir-prop {
-  margin-top: 4px;
-}
 
-.credit .num {
+/* Sizes: three one-click chips and a field for anything else. */
+.sizes {
+  display: flex;
+  gap: 4px;
+}
+.chip {
+  flex: none;
+  height: 28px;
+  min-width: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--raised);
+  color: var(--ink-2);
+  font: 500 12px/1 var(--font);
+  cursor: pointer;
+  transition:
+    background var(--fast) var(--ease),
+    color var(--fast) var(--ease),
+    border-color var(--fast) var(--ease);
+}
+.chip:hover {
+  color: var(--ink);
+}
+.chip[aria-pressed='true'] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+}
+.chip--input {
+  flex: 1;
+  min-width: 0;
+  cursor: text;
+  text-align: left;
+}
+.chip--input::placeholder {
   color: var(--ink-3);
 }
+.chip--input:focus-visible {
+  border-color: var(--ink);
+  box-shadow: none;
+}
 
-/* A long file name in the action stays on one line. */
+/* Files: one 28 px line each; the chosen one is on the stage. */
+.files {
+  margin: 0;
+  padding: 4px 0 8px;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+.file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 var(--pad);
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font: 400 12px/16px var(--font);
+  text-align: left;
+}
+.file > .truncate {
+  flex: 1;
+}
+button.file {
+  cursor: pointer;
+}
+button.file:hover {
+  background: var(--hover);
+}
+button.file[aria-pressed='true'] {
+  color: var(--ink);
+  font-weight: 500;
+}
+.file__size {
+  flex: none;
+  color: var(--ink);
+}
+.file__dims {
+  flex: none;
+  color: var(--ink-3);
+  font-size: 11px;
+}
+.file__dims--over {
+  color: var(--red-text);
+}
+.file__error {
+  flex: none;
+  color: var(--error);
+}
+
+.note {
+  padding: 0 var(--pad) 16px;
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 16px;
+}
+.note--error {
+  color: var(--error);
+}
+.note--row {
+  margin-top: -8px;
+  padding: 0 0 0 64px;
+}
+
+/* Empty: two lines where the stage will be. */
+.empty {
+  display: grid;
+  gap: 4px;
+  place-content: center;
+  margin: 12px var(--pad) 0;
+  height: 208px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 12px;
+  text-align: center;
+}
+.empty__title {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Import: the whole stage is the drop target and the button. */
+.dropzone {
+  display: grid;
+  gap: 6px;
+  place-items: center;
+  align-content: center;
+  height: 208px;
+  margin: 12px var(--pad) 0;
+  border: 1px dashed var(--line-strong);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink-2);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    border-color var(--fast) var(--ease),
+    background var(--fast) var(--ease);
+}
+.dropzone:hover {
+  border-color: var(--ink);
+  background: var(--hover);
+}
+.dropzone__title {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.report {
+  padding: 4px var(--pad) 16px;
+}
+
+.working {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 var(--pad);
+  color: var(--ink-2);
+}
+
+/* The dock: the one action, its size on the right. */
+.dock {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px var(--pad);
+  border-top: 1px solid var(--line);
+}
 .dock .ir-button {
+  justify-content: space-between;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  padding: 0 16px;
+}
+.dock .ir-button:only-child > :only-child {
+  margin: 0 auto;
+}
+.dock__size {
+  flex: none;
+  font-weight: 500;
+  opacity: 0.85;
+}
+.dock--work {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+}
+.dock--work .working {
+  height: 64px;
+}
+
+/* Settings: the closing credit and links. */
+.about {
+  display: grid;
+  gap: 8px;
+  margin-top: auto;
+  padding: 16px var(--pad);
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 16px;
+}
+.about a {
+  color: var(--ink-2);
+}
+.about__links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.text-button--danger {
+  justify-self: start;
+  color: var(--error);
+  text-decoration-color: currentColor;
+}
+.text-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.drop {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  box-shadow: inset 0 0 0 2px var(--ink);
+  font-weight: 600;
+  pointer-events: none;
 }
