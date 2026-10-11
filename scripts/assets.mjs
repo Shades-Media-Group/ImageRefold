@@ -18,13 +18,8 @@ const font = (pkg, file) =>
 const display = font('@fontsource/space-grotesk', 'space-grotesk-latin-700-normal.woff2')
 const body = font('@fontsource-variable/hanken-grotesk', 'hanken-grotesk-latin-wght-normal.woff2')
 
-// On a red ground the largest size turns paper, so all three sizes still read.
-const markOnRed = markShapes({ redFill: color.paper })
 const mark = (shapes) =>
   `<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">${shapes}</svg>`
-
-const HEADLINE = 'Lighter images,<br>straight from Figma.'
-const NOTE = 'Free and open source.<br>Nothing leaves your computer.'
 
 const page = (width, height, ground, ink, content) => `<!doctype html>
 <html><head><style>
@@ -35,26 +30,6 @@ html, body { width: ${width}px; height: ${height}px; overflow: hidden; }
 body { background: ${ground}; color: ${ink}; font-family: Body; position: relative; }
 svg { display: block; width: 100%; height: 100%; }
 </style></head><body>${content}</body></html>`
-
-// Name top left, headline, note at the foot; the mark at full size on the right.
-const banner = (dark) => {
-  const ground = dark ? color.ink : color.red
-  const ink = color.paper
-  const shapes = dark ? markShapes({ inkFill: color.paper }) : markOnRed
-  return page(
-    1280,
-    640,
-    ground,
-    ink,
-    `<div style="position:absolute; left:72px; top:64px; display:flex; align-items:center; gap:16px">
-      <div style="width:40px; height:40px">${mark(shapes)}</div>
-      <span style="font:700 34px/1 Display; letter-spacing:-0.035em">ImageRefold</span>
-    </div>
-    <h1 style="position:absolute; left:68px; top:196px; font:700 76px/0.98 Display; letter-spacing:-0.045em">${HEADLINE}</h1>
-    <p style="position:absolute; left:72px; bottom:64px; font:500 26px/1.3 Body">${NOTE}</p>
-    <div style="position:absolute; right:72px; bottom:64px; width:420px; height:420px">${mark(shapes)}</div>`,
-  )
-}
 
 const touchIcon = page(
   180,
