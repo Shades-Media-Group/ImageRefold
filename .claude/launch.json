@@ -6,6 +6,12 @@
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["--cwd", "apps/site", "preview", "--port", "4317", "--strictPort"],
       "port": 4317
+    },
+    {
+      "name": "plugin-harness",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["dev:harness"],
+      "port": 4318
     }
   ]
 }

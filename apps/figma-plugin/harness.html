@@ -1,0 +1,153 @@
+<!doctype html>
+<!--
+  A stand-in for Figma, for working on the plugin window in a browser:
+  yarn dev:harness, then open http://localhost:4318/apps/figma-plugin/harness.html.
+  It answers the window's messages the way src/main does, with the repository's
+  own banners as the "layers". ?theme=dark adds Figma's dark class; ?layers=1 selects one.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ImageRefold plugin harness</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        gap: 24px;
+        padding: 24px;
+        background: #e5e5e5;
+        font: 12px system-ui;
+      }
+      iframe {
+        width: 400px;
+        height: 640px;
+        border: 0;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+      pre {
+        flex: 1;
+        margin: 0;
+        max-height: 640px;
+        overflow: auto;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="plugin" src="/apps/figma-plugin/dist/ui.html"></iframe>
+    <pre id="log"></pre>
+    <script type="module">
+      const frame = document.getElementById('plugin')
+      const log = (line) => (document.getElementById('log').textContent += `${line}\n`)
+      const post = (message) => frame.contentWindow.postMessage({ pluginMessage: message }, '*')
+      const bytes = async (url) => new Uint8Array(await (await fetch(url)).arrayBuffer())
+
+      const params = new URLSearchParams(location.search)
+      const layers = [
+        {
+          id: '1:2',
+          name: 'Social card',
+          width: 1280,
+          height: 640,
+          src: '/assets/brand/social-preview.png',
+        },
+        {
+          id: '1:3',
+          name: 'Banners/Dark',
+          width: 1280,
+          height: 640,
+          src: '/assets/brand/readme-banner-dark.png',
+        },
+      ].slice(0, Number(params.get('layers')) || undefined)
+      const settings = JSON.parse(localStorage.getItem('settings') ?? 'null')
+
+      /** Figma's export at a size: the source drawn at that size, as PNG. */
+      async function render(layer, size) {
+        const bitmap = await createImageBitmap(await (await fetch(layer.src)).blob())
+        const scale = size.kind === 'scale' ? size.value : size.value / layer.width
+        const canvas = new OffscreenCanvas(
+          Math.round(layer.width * scale),
+          Math.round(layer.height * scale),
+        )
+        canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height)
+        return new Uint8Array(
+          await (await canvas.convertToBlob({ type: 'image/png' })).arrayBuffer(),
+        )
+      }
+
+      addEventListener('message', async (event) => {
+        const message = event.data.pluginMessage
+        if (!message) return
+        log(`ui → main: ${message.type}`)
+        if (message.type === 'settings')
+          localStorage.setItem('settings', JSON.stringify(message.settings))
+        if (message.type === 'render')
+          for (const id of message.ids)
+            for (const size of message.sizes) {
+              const layer = layers.find((l) => l.id === id)
+              post({ type: 'rendered', job: message.job, id, size, png: await render(layer, size) })
+            }
+        if (message.type === 'scan')
+          post({
+            type: 'scanned',
+            scope: 'page',
+            images: await Promise.all(
+              layers.map(async (layer, i) => ({
+                hash: `hash${i}`,
+                name: layer.name,
+                uses: i + 1,
+                width: layer.width * 2,
+                height: layer.height * 2,
+                shownWidth: 320,
+                shownHeight: 160,
+                bytes: await render(layer, { kind: 'scale', value: 2 }),
+              })),
+            ),
+          })
+        if (message.type === 'replace')
+          log(
+            `  replaced ${message.images.map((i) => `${i.hash}: ${i.bytes.length} B`).join(', ')}`,
+          )
+        if (message.type === 'place') {
+          log(
+            `  placed ${message.images.map((i) => `${i.name} ${i.width}×${i.height} ${i.bytes.length} B`).join(', ')}`,
+          )
+          post({ type: 'placed', count: message.images.length, filled: message.fill })
+        }
+        if (message.type === 'notify') log(`  notify: ${message.message}`)
+      })
+
+      let started = false
+      const start = () => {
+        if (started || !frame.contentDocument?.getElementById('root')?.children.length) return
+        started = true
+        if (params.get('theme') === 'dark')
+          frame.contentDocument.documentElement.classList.add('figma-dark')
+        else frame.contentDocument.documentElement.classList.add('figma-light')
+        post({
+          type: 'ready',
+          version: '0.1.0',
+          settings: settings ?? {
+            format: 'webp',
+            quality: 80,
+            lossless: false,
+            scales: [1],
+            width: null,
+            pattern: '{name}{@size}',
+            zip: true,
+          },
+        })
+        post({
+          type: 'selection',
+          layers: layers.map(({ src: _src, ...layer }) => layer),
+          fillable: layers.length,
+        })
+      }
+      // Like Figma, wait for the window to be up; checking also covers a load that came first.
+      frame.addEventListener('load', start)
+      const waiting = setInterval(() => (started ? clearInterval(waiting) : start()), 100)
+    </script>
+  </body>
+</html>
