@@ -9,7 +9,7 @@ web
 Two surfaces share the Shades design system:
 
 - **Figma plugin window** in Figma desktop and Figma in the browser: a 400 × 640 px iframe, drawn with the same tokens and controls as PageRecast's plugin.
-- **The website**, imagerefold.shades.md: a static site on a Cloudflare Worker, in English first. The other ten Shades languages follow the first release.
+- **The website**, imagerefold.shades.md: a static site on a Cloudflare Worker, in the same eleven languages as every Shades site: English (at `/`), French, Romanian, Russian, Spanish, Italian, Turkish, Hindi, Japanese, Simplified and Traditional Chinese. The plugin itself is in English for now.
 
 ## Stack
 

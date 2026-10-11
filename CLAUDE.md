@@ -37,7 +37,7 @@ Use Node 22: `export PATH=$HOME/.nvm/versions/node/v22.23.1/bin:$PATH`; the shel
 
 ## Design rules
 
-The plugin panel matches PageRecast's: the grammar of Figma's own inspector, full-bleed sections with hairline dividers, 32 px rows, 11–13 px Hanken Grotesk, text tabs, one red primary action per view. The website follows the PageRecast site: full-bleed chapters alternating paper, ink and one red, a two-column chapter head, pill buttons, lists on hairlines.
+The plugin panel matches PageRecast's: the grammar of Figma's own inspector, full-bleed sections with hairline dividers, 32 px rows, 11–13 px Hanken Grotesk, text tabs, one red primary action per view. The website follows the PageRecast site, in the same eleven languages (`apps/site/i18n/*.json`, one dictionary per language; every key in each): full-bleed chapters alternating paper, ink and one red, a two-column chapter head, pill buttons, lists on hairlines.
 
 Never ship any of these:
 

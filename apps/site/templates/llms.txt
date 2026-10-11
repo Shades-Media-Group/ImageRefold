@@ -12,6 +12,7 @@
 - Batches: every selected layer at once, as separate files or one ZIP, named by a pattern.
 - Import: images dropped into the plugin are compressed before they are placed; heavy image fills can be replaced in place to make a Figma file smaller.
 - Privacy: images are encoded inside the plugin. Its manifest allows no network access, so Figma blocks any request.
+- Languages: this site is in English, French, Romanian, Russian, Spanish, Italian, Turkish, Hindi, Japanese, Simplified and Traditional Chinese. The plugin is in English.
 - Current version: {{@version}}.
 
 ## Site

@@ -22,6 +22,21 @@
   <a href="https://imagerefold.shades.md/privacy/"><b>Privacy</b></a>
 </p>
 
+<p align="center">
+  The website in
+  <a href="https://imagerefold.shades.md/">English</a> ·
+  <a href="https://imagerefold.shades.md/fr/">Français</a> ·
+  <a href="https://imagerefold.shades.md/ro/">Română</a> ·
+  <a href="https://imagerefold.shades.md/ru/">Русский</a> ·
+  <a href="https://imagerefold.shades.md/es/">Español</a> ·
+  <a href="https://imagerefold.shades.md/it/">Italiano</a> ·
+  <a href="https://imagerefold.shades.md/tr/">Türkçe</a> ·
+  <a href="https://imagerefold.shades.md/hi/">हिन्दी</a> ·
+  <a href="https://imagerefold.shades.md/ja/">日本語</a> ·
+  <a href="https://imagerefold.shades.md/zh/">简体中文</a> ·
+  <a href="https://imagerefold.shades.md/zh-hant/">繁體中文</a>
+</p>
+
 > **In development.** Version 0.1 of the Figma plugin works and can be run from source (below). Watch this repository to hear when the first release reaches the Figma Community.
 
 ## What it does
