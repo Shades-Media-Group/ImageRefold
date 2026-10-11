@@ -2,9 +2,6 @@
  * Renders the raster files the repository and the website need, from the
  * brand geometry in scripts/brand.mjs, with Playwright's Chromium:
  *
- *   assets/brand/readme-banner-light.png   1280 × 640 at 2×, README header
- *   assets/brand/readme-banner-dark.png    1280 × 640 at 2×
- *   assets/brand/social-preview.png        1280 × 640, link and GitHub preview
  *   apps/site/public/apple-touch-icon.png  180 × 180
  *
  * Usage: yarn assets   (after yarn brand)
@@ -67,12 +64,8 @@ const touchIcon = page(
   `<div style="padding:22px; width:180px; height:180px">${mark(markShapes())}</div>`,
 )
 
-const JOBS = [
-  ['assets/brand/readme-banner-light.png', 1280, 640, 2, banner(false)],
-  ['assets/brand/readme-banner-dark.png', 1280, 640, 2, banner(true)],
-  ['assets/brand/social-preview.png', 1280, 640, 1, banner(false)],
-  ['apps/site/public/apple-touch-icon.png', 180, 180, 1, touchIcon],
-]
+// The banners, social preview and Community cover use real screenshots: scripts/store-assets.mjs.
+const JOBS = [['apps/site/public/apple-touch-icon.png', 180, 180, 1, touchIcon]]
 
 const browser = await chromium.launch()
 for (const [out, width, height, scale, html] of JOBS) {

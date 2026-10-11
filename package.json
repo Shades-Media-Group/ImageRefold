@@ -31,7 +31,8 @@
     "release": "node scripts/release.mjs",
     "build": "yarn --cwd apps/figma-plugin build",
     "dev:plugin": "yarn --cwd apps/figma-plugin dev",
-    "dev:harness": "vite --port 4318 --strictPort"
+    "dev:harness": "vite --port 4318 --strictPort",
+    "store-assets": "node scripts/store-assets.mjs"
   },
   "packageManager": "yarn@1.22.22",
   "type": "module",
