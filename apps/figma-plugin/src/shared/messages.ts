@@ -2,32 +2,46 @@
 
 export type Format = 'webp' | 'avif' | 'jpeg' | 'png'
 
-/** The scales offered, in order. */
-export const SCALES = [0.5, 0.75, 1, 1.5, 2, 3, 4]
+/** The scales offered as one-click presets; any other size is typed in. */
+export const PRESET_SCALES = [1, 2, 3]
+
+/** Settings saved by an earlier version, brought up to date; anything unknown falls back to the default. */
+export function migrateSettings(saved: Partial<Settings> & { width?: number | null }): Settings {
+  const { width, ...rest } = saved
+  const merged = { ...DEFAULT_SETTINGS, ...rest }
+  if (!saved.widths && width) merged.widths = [width]
+  if (!['light', 'dark', 'auto'].includes(merged.theme)) merged.theme = 'light'
+  return merged
+}
 
 /** One output size: a multiple of the layer's size, or an exact width in pixels. */
 export type Size = { kind: 'scale'; value: number } | { kind: 'width'; value: number }
 
+export type Theme = 'light' | 'dark' | 'auto'
+
 export interface Settings {
+  /** Light unless chosen otherwise; 'auto' follows Figma's own theme. */
+  theme: Theme
   format: Format
   /** 1–100, the same scale for every lossy format. */
   quality: number
   /** WebP and AVIF only; PNG is always lossless. */
   lossless: boolean
   scales: number[]
-  /** An exact width exported as well as the scales, or null. */
-  width: number | null
+  /** Exact widths in pixels, exported as well as the scales. */
+  widths: number[]
   /** File name pattern; see naming.ts. */
   pattern: string
   zip: boolean
 }
 
 export const DEFAULT_SETTINGS: Settings = {
+  theme: 'light',
   format: 'webp',
   quality: 80,
   lossless: false,
   scales: [1],
-  width: null,
+  widths: [],
   pattern: '{name}{@size}',
   zip: true,
 }

@@ -88,3 +88,28 @@ export function saving(before: number, after: number): string {
   const change = Math.round((1 - after / before) * 100)
   return change === 0 ? '0%' : change > 0 ? `−${change}%` : `+${-change}%`
 }
+
+/**
+ * Sizes typed by hand: "0.5x, 1.5×, 1200" gives scales 0.5 and 1.5 and a
+ * 1200 px width. A bare number of 8 or more is a width; below that, a scale.
+ * Anything unreadable is left out.
+ */
+export function parseSizes(text: string): { scales: number[]; widths: number[] } {
+  const scales = new Set<number>()
+  const widths = new Set<number>()
+  for (const part of text.split(/[,\s]+/).filter(Boolean)) {
+    const match = /^(\d+(?:\.\d+)?)\s*(x|×|w|px)?$/i.exec(part)
+    if (!match) continue
+    const value = Number(match[1])
+    const unit = match[2]?.toLowerCase()
+    if (!(value > 0)) continue
+    if (unit === 'x' || unit === '×' || (!unit && value < 8)) {
+      if (value <= 8) scales.add(Math.round(value * 100) / 100)
+    } else if (value <= 16384) widths.add(Math.round(value))
+  }
+  return { scales: [...scales].sort((a, b) => a - b), widths: [...widths].sort((a, b) => a - b) }
+}
+
+/** The typed sizes as they read back: "0.5x, 1200w". */
+export const formatSizes = (scales: number[], widths: number[]) =>
+  [...scales.map((s) => `${s}x`), ...widths.map((w) => `${w}w`)].join(', ')

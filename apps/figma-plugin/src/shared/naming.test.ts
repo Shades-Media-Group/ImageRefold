@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { fileName, formatBytes, saving, uniqueNames, zipName } from './naming'
+import {
+  fileName,
+  formatBytes,
+  formatSizes,
+  parseSizes,
+  saving,
+  uniqueNames,
+  zipName,
+} from './naming'
 
 const px = { width: 2880, height: 1800 }
 
@@ -67,5 +75,14 @@ describe('zipName', () => {
     expect(zipName(['Hero', 'Cards/Promo', 'Footer'])).toBe('Hero and 2 more.zip')
     expect(zipName(['a:b'])).toBe('a-b.zip')
     expect(zipName(['  '])).toBe('images.zip')
+  })
+})
+
+describe('parseSizes', () => {
+  it('reads scales and widths as people type them', () => {
+    expect(parseSizes('0.5x, 1.5×, 1200')).toEqual({ scales: [0.5, 1.5], widths: [1200] })
+    expect(parseSizes('2  640w 0.75 1440px')).toEqual({ scales: [0.75, 2], widths: [640, 1440] })
+    expect(parseSizes('abc, -2, 0, 99999')).toEqual({ scales: [], widths: [] })
+    expect(formatSizes([0.5], [1200])).toBe('0.5x, 1200w')
   })
 })
