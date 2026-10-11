@@ -2,12 +2,19 @@
   "$schema": "../../node_modules/wrangler/config-schema.json",
   // The website: static files served by a Worker at imagerefold.shades.md.
   "name": "imagerefold-site",
+  "main": "./worker.ts",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    // The Worker sees every request first, so the other names redirect before any file is served.
+    "run_worker_first": true,
     "not_found_handling": "none",
     "html_handling": "auto-trailing-slash",
   },
-  "routes": [{ "pattern": "imagerefold.shades.md", "custom_domain": true }],
+  "routes": [
+    { "pattern": "imagerefold.shades.md", "custom_domain": true },
+    { "pattern": "imagereframe.shades.md", "custom_domain": true },
+  ],
   "observability": { "enabled": false },
 }
