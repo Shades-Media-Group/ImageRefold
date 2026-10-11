@@ -1,0 +1,24 @@
+name: An image came out wrong
+description: The exported or imported image looks different, is too large, or failed.
+title: '[Export] '
+labels: [export-quality]
+body:
+  - type: textarea
+    id: difference
+    attributes:
+      label: What looks wrong
+      description: Colours, transparency, sharpness, file size or an error. Attach the original and the result if you can.
+    validations:
+      required: true
+  - type: input
+    id: settings
+    attributes:
+      label: Settings
+      placeholder: WebP · quality 80 · 2× · 1440 px wide
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: ImageRefold version
+      placeholder: 0.1.0
