@@ -1,0 +1,275 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.app > .ir-header {
+  flex: none;
+}
+
+/* A column, so the credit can sit at the bottom edge of short screens. */
+.scroll {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.scroll > * {
+  flex: none;
+}
+
+/* A title row in place of the tabs while reviewing, importing or in settings. */
+.ir-tabs--title button {
+  margin-left: -4px;
+  color: var(--ink);
+  font-weight: 600;
+}
+.flip {
+  transform: scaleX(-1);
+  color: var(--ink-3);
+}
+
+.intro {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 24px var(--pad) 20px;
+}
+.keys {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.keys .ir-keycap {
+  min-width: 32px;
+  height: 32px;
+  border-bottom-width: 3px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.intro h1 {
+  font: 600 15px/20px var(--font);
+  letter-spacing: -0.01em;
+}
+.intro p {
+  max-width: 34em;
+  color: var(--ink-2);
+  line-height: 18px;
+}
+.intro .ir-button {
+  margin-top: 4px;
+}
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* Plain lines of text, 24 px apart; no bullets. */
+.facts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.facts li {
+  padding: 4px 0;
+  color: var(--ink-2);
+  line-height: 16px;
+}
+
+.working {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 var(--pad);
+  color: var(--ink-2);
+}
+
+.source h1 {
+  font: 600 13px/16px var(--font);
+}
+.source p {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 16px;
+}
+.source--lead h1 {
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+}
+.source--lead p {
+  font-size: 12px;
+}
+.body {
+  color: var(--ink-2);
+  line-height: 18px;
+}
+
+/* Review: the previewed frame, large and scrollable, on the stage. */
+.preview {
+  flex: none;
+  height: 232px;
+  padding: 12px;
+  overflow-y: auto;
+  background: var(--stage);
+  overscroll-behavior: contain;
+}
+.preview img {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+.preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px 0 var(--pad);
+  background: var(--stage);
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+}
+.preview-bar .num {
+  margin-left: 4px;
+  font-weight: 400;
+}
+.preview-bar .ir-segmented {
+  width: 112px;
+  flex: none;
+}
+.preview-bar + .ir-section {
+  border-top: 0;
+}
+/* At 100%: the file at its real pixel size, scrolling both ways when larger than the stage. */
+.preview {
+  overflow: auto;
+}
+.preview img {
+  max-width: none;
+}
+.preview .ir-spinner {
+  margin: 96px auto 0;
+}
+
+.dock {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px var(--pad);
+  border-top: 1px solid var(--line);
+}
+/* While working: the progress line on the hairline, the step under it. */
+.dock--work {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+}
+.dock--work .working {
+  height: 60px;
+}
+
+.drop {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  box-shadow: inset 0 0 0 2px var(--ink);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* Files: one 32 px row each, the name and its size; the chosen one is shown on the stage. */
+.files {
+  margin: 0 calc(var(--pad) * -1);
+  padding: 0;
+  list-style: none;
+}
+.file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: var(--row);
+  padding: 0 var(--pad);
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 400 12px/16px var(--font);
+  text-align: left;
+}
+button.file {
+  cursor: pointer;
+}
+button.file:hover {
+  background: var(--hover);
+}
+button.file[aria-pressed='true'] {
+  background: var(--hover);
+  font-weight: 600;
+}
+.file > .num {
+  flex: none;
+}
+.file__larger {
+  color: var(--red-text);
+}
+.file__error {
+  flex: none;
+  color: var(--error);
+}
+
+/* Quality: the slider and its value. */
+.range {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: 8px;
+}
+.range input {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--ink);
+}
+.range output {
+  text-align: right;
+}
+.ir-section .ir-segmented + .ir-prop,
+.ir-section .ir-prop + .ir-segmented {
+  margin-top: 8px;
+}
+.ir-section > .ir-segmented {
+  margin-bottom: 4px;
+}
+.ir-section .hint + .ir-prop {
+  margin-top: 4px;
+}
+
+.credit .num {
+  color: var(--ink-3);
+}
+
+/* A long file name in the action stays on one line. */
+.dock .ir-button {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
