@@ -2,7 +2,7 @@
 // from conventional commits since the last tag, commits and tags.
 // Usage: yarn release <patch|minor|major>   then: git push --follow-tags
 import { execFileSync } from 'node:child_process'
-import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -64,7 +64,7 @@ writeFileSync(changelogPath, updated.replace(/\n{3,}/g, '\n\n'))
 
 // One version for every workspace.
 const manifests = [pkgPath]
-for (const dir of ['packages', 'apps']) {
+for (const dir of ['packages', 'apps'].filter((d) => existsSync(join(root, d)))) {
   for (const name of readdirSync(join(root, dir)))
     manifests.push(join(root, dir, name, 'package.json'))
 }
