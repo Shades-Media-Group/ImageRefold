@@ -1,0 +1,217 @@
+{
+  "language": "Idioma",
+  "imageAlt": "ImageRefold: imágenes más ligeras, directamente desde Figma",
+  "preferred": {
+    "button": "Añadir a fuentes preferidas<span class='visually-hidden'> en Google</span>",
+    "mention": "Encuentra ImageRefold más a menudo en la Búsqueda de Google: <a data-link='preferred' target='_blank'>añádelo a tus fuentes preferidas</a>."
+  },
+  "nav": {
+    "label": "Principal",
+    "home": "Inicio",
+    "homeLabel": "Inicio de ImageRefold",
+    "try": "Pruébalo",
+    "features": "Funciones",
+    "privacy": "Privacidad",
+    "faq": "Preguntas",
+    "cta": "Instalar gratis"
+  },
+  "footer": {
+    "top": "ImageRefold, volver arriba",
+    "tagline": "Comprime y exporta imágenes desde Figma, y vuelve a traerlas ya ligeras. Gratis, de código abierto, y tus imágenes nunca salen de tu ordenador.",
+    "label": "Pie de página",
+    "product": "Producto",
+    "project": "Proyecto",
+    "trust": "Confianza",
+    "changelog": "Registro de cambios",
+    "releases": "Versiones",
+    "issues": "Informar de un problema",
+    "security": "Seguridad",
+    "license": "Licencia MIT",
+    "credit": "Gratis y de código abierto. Creado por <a data-link='shades'>Shades Media Group</a>.",
+    "version": "Versión"
+  },
+  "home": {
+    "title": "Comprime y exporta imágenes desde Figma, gratis | ImageRefold",
+    "description": "Un plugin de Figma gratis y de código abierto que exporta capas en WebP, AVIF, JPG y PNG, muestra el peso antes de guardar y comprime en tu ordenador.",
+    "hero": {
+      "title": "Imágenes más ligeras, directamente desde Figma.",
+      "lead": "Exporta cualquier capa en WebP, AVIF, JPG o PNG, mira el peso del archivo antes de guardar y vuelve a llevar las imágenes a Figma ya comprimidas. Gratis, de código abierto y nada sale de tu ordenador.",
+      "try": "Pruébalo con una imagen",
+      "github": "Seguir en GitHub",
+      "note": "El plugin de Figma está en desarrollo y por ahora se ejecuta desde el código fuente. Sigue el repositorio para saber cuándo llega a Figma Community."
+    },
+    "try": {
+      "title": "Pruébalo con tu propia imagen.",
+      "text": "Elige una imagen y un formato. Esta página la comprime en tu navegador para que veas el peso y la calidad lado a lado. No se sube nada.",
+      "choose": "Elegir una imagen",
+      "drop": "o suéltala aquí. PNG, JPG, WebP, AVIF o GIF.",
+      "format": "Formato",
+      "quality": "Calidad",
+      "before": "Original",
+      "after": "Resultado",
+      "saved": "Ahorro",
+      "download": "Descargar el resultado",
+      "note": "Esta página usa el codificador de tu navegador. El plugin usa codificadores propios que generan archivos más pequeños.",
+      "original": "Original",
+      "result": "Resultado",
+      "originalAlt": "La imagen original",
+      "resultAlt": "La imagen comprimida",
+      "compare": "Desliza para comparar el original con el resultado"
+    },
+    "features": {
+      "title": "Todo lo que necesita una exportación.",
+      "text": "Elige las capas, elige el formato, mira el peso. Luego expórtalas todas a la vez, con los nombres que necesita tu proyecto.",
+      "formats": {
+        "title": "WebP, AVIF, JPG y PNG",
+        "text": "Con o sin pérdida, con un solo control de calidad para todos los formatos."
+      },
+      "preview": {
+        "title": "El peso antes de guardar",
+        "text": "El peso de cada archivo y lo que ahorras, con el original junto al resultado para comparar."
+      },
+      "scale": {
+        "title": "Todos los tamaños a la vez",
+        "text": "0.5×, 0.75×, 1×, 1.5×, 2×, 3×, 4× o un ancho exacto, varios en una sola exportación."
+      },
+      "batch": {
+        "title": "Selecciones completas",
+        "text": "Todos los marcos seleccionados de una vez, como archivos separados o un solo ZIP, con nombres según un patrón que tú defines."
+      },
+      "import": {
+        "title": "Comprimidas al entrar",
+        "text": "Lleva imágenes a Figma ya ligeras, o cambia en su sitio los rellenos de imagen pesados."
+      },
+      "file": {
+        "title": "Un archivo de Figma más ligero",
+        "text": "Las imágenes más grandes de lo que se muestran se cambian por copias más ligeras, y todo se deshace en un solo paso."
+      }
+    },
+    "privacy": {
+      "title": "Tus imágenes se quedan en tu ordenador.",
+      "text": "ImageRefold codifica cada imagen dentro de Figma, en tu equipo. Su manifiesto no permite ningún acceso a la red, así que el propio Figma bloquea cualquier petición. Sin cuenta, sin servidor, sin analítica."
+    },
+    "open": {
+      "title": "Código abierto, hasta el manifiesto.",
+      "text": "Cada línea está en GitHub con licencia MIT. El manifiesto es la prueba: no permite ningún dominio, así que no se puede enviar nada a ningún sitio.",
+      "github": "Leer el código",
+      "codeLabel": "El manifiesto del plugin, que no permite ningún acceso a la red"
+    },
+    "faq": {
+      "title": "Preguntas, respondidas.",
+      "lead": "Lo que se pregunta antes de exportar la primera imagen con ImageRefold.",
+      "howto": {
+        "q": "¿Cómo exporto una imagen comprimida desde Figma?",
+        "name": "Exportar una imagen comprimida desde Figma con ImageRefold",
+        "intro": "Con el plugin ImageRefold instalado:",
+        "steps": {
+          "select": {
+            "name": "Selecciona las capas",
+            "text": "Selecciona los marcos, grupos o imágenes que quieres exportar."
+          },
+          "choose": {
+            "name": "Elige el formato",
+            "text": "Abre ImageRefold y elige un formato, una calidad y los tamaños que necesitas."
+          },
+          "export": {
+            "name": "Exporta",
+            "text": "Compara el peso de cada archivo con el original y exporta los archivos o un ZIP."
+          }
+        }
+      },
+      "items": {
+        "free": {
+          "q": "¿ImageRefold es gratis de verdad?",
+          "a": "Sí. No hay planes, límites, pruebas, cuentas ni marcas de agua, y nunca los habrá. ImageRefold es de código abierto con licencia MIT."
+        },
+        "upload": {
+          "q": "¿Se suben mis imágenes a algún sitio?",
+          "a": "No. Cada imagen se codifica dentro del plugin, en tu ordenador. El plugin está hecho sin acceso a la red, así que no podría subir nada ni por error."
+        },
+        "formats": {
+          "q": "¿En qué formatos exporta?",
+          "a": "WebP, AVIF, JPG y PNG, con o sin pérdida. La transparencia se conserva en WebP, AVIF y PNG."
+        },
+        "file": {
+          "q": "¿Puede hacer más pequeño mi archivo de Figma?",
+          "a": "Sí. ImageRefold puede comprimir las imágenes que ya están en un archivo y cambiarlas en su sitio, así que el archivo pesa menos y el diseño queda igual."
+        },
+        "when": {
+          "q": "¿Cuándo puedo instalarlo?",
+          "a": "El plugin está en desarrollo. Sigue el <a data-link='repo'>repositorio de GitHub</a> para saber cuándo llega la primera versión a Figma Community."
+        }
+      }
+    },
+    "install": {
+      "title": "Obtén ImageRefold.",
+      "figma": "Plugin de Figma",
+      "figmaText": "En desarrollo para Figma Community. Gratis y sin cuenta.",
+      "figmaButton": "Seguir el lanzamiento",
+      "github": "Código fuente",
+      "githubText": "Lee el código, informa de un problema o sugiere una función.",
+      "githubLink": "Abrir en GitHub"
+    },
+    "runtime": {
+      "saved": "−{percent}",
+      "larger": "+{percent}",
+      "same": "Mismo peso",
+      "caption": "{format} · calidad {quality}",
+      "lossless": "{format} · sin pérdida",
+      "error": "Este navegador no pudo leer ese archivo. Prueba con un PNG, JPG o WebP."
+    }
+  },
+  "privacy": {
+    "title": "Política de privacidad | ImageRefold",
+    "description": "ImageRefold no recopila, transmite, vende ni comparte ningún dato personal. Tus imágenes se codifican en tu ordenador y nunca se suben.",
+    "heading": "Política de privacidad",
+    "updated": "Última actualización: 11 de octubre de 2026",
+    "intro": "ImageRefold es un plugin de Figma creado por Shades Media Group. Esta política se aplica al plugin y a este sitio web.",
+    "shortTitle": "En resumen",
+    "short": "ImageRefold no recopila, transmite, vende ni comparte ningún dato personal. Tus imágenes nunca salen de tu ordenador.",
+    "pluginTitle": "A qué accede el plugin de Figma",
+    "pluginLayers": "<strong>Las capas que seleccionas</strong>, para exportarlas como imágenes en el formato que elijas.",
+    "pluginImages": "<strong>Las imágenes que sueltas o abres en el plugin</strong>, para comprimirlas y colocarlas en el archivo actual.",
+    "pluginStorage": "<strong>El almacenamiento de plugins de Figma</strong>, para recordar tus ajustes y preajustes.",
+    "pluginNetwork": "El plugin está hecho sin acceso a la red: su manifiesto no permite ningún dominio, así que Figma bloquea cualquier petición. La codificación se hace en la ventana del plugin, en tu equipo.",
+    "siteTitle": "Este sitio web",
+    "site": "El sitio es estático. No usa cookies ni carga scripts, fuentes o rastreadores de terceros. La demo de compresión funciona en tu navegador, y la imagen que eliges nunca se envía a ningún sitio. La preferencia de visualización que elijas se queda en tu navegador.",
+    "dataTitle": "Datos que recibimos",
+    "data": "Ninguno. No hay cuentas, analítica, informes de errores ni seguimiento de ningún tipo.",
+    "childrenTitle": "Menores",
+    "children": "ImageRefold es una herramienta de diseño y no está dirigida a menores.",
+    "changesTitle": "Cambios",
+    "changes": "Los cambios en esta política se publican en esta página y se anotan en el <a data-link='changelog'>registro de cambios</a>.",
+    "contactTitle": "Contacto"
+  },
+  "prefs": {
+    "open": "Pantalla y accesibilidad",
+    "title": "Pantalla",
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Auto",
+    "access": "Accesibilidad",
+    "text": "Texto más grande",
+    "contrast": "Más contraste",
+    "motion": "Reducir el movimiento",
+    "links": "Subrayar los enlaces",
+    "reading": "Lectura más fácil",
+    "saved": "Se guarda solo en este navegador.",
+    "reset": "Restablecer",
+    "close": "Cerrar",
+    "privacy": "Opciones de privacidad"
+  },
+  "consent": {
+    "title": "Tu privacidad",
+    "text": "Este sitio guarda solo lo que necesita para funcionar, como tus ajustes de pantalla. Las herramientas de analítica o marketing solo funcionarían con tu permiso.",
+    "acceptAll": "Aceptar todo",
+    "necessaryOnly": "Solo necesarias",
+    "customize": "Personalizar",
+    "save": "Guardar elección",
+    "necessary": "Necesarias",
+    "necessaryText": "Recuerdan tus ajustes de pantalla y privacidad. Siempre activas.",
+    "analytics": "Analítica",
+    "analyticsText": "Recuento anónimo de visitas, para saber qué ayuda. No se usa en este sitio hoy.",
+    "marketing": "Marketing",
+    "marketingText": "Publicidad y medición de campañas. No se usa en este sitio hoy."
+  }
+}

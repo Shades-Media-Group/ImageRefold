@@ -1,0 +1,217 @@
+{
+  "language": "Dil",
+  "imageAlt": "ImageRefold: daha hafif görseller, doğrudan Figma'dan",
+  "preferred": {
+    "button": "Tercih edilen kaynaklara ekle<span class='visually-hidden'> (Google)</span>",
+    "mention": "ImageRefold'u Google Arama'da daha sık gör: <a data-link='preferred' target='_blank'>tercih edilen kaynak olarak ekle</a>."
+  },
+  "nav": {
+    "label": "Ana menü",
+    "home": "Ana sayfa",
+    "homeLabel": "ImageRefold ana sayfa",
+    "try": "Dene",
+    "features": "Özellikler",
+    "privacy": "Gizlilik",
+    "faq": "Sorular",
+    "cta": "Ücretsiz kur"
+  },
+  "footer": {
+    "top": "ImageRefold, başa dön",
+    "tagline": "Görselleri Figma'dan sıkıştırıp dışa aktar, Figma'ya da zaten hafiflemiş olarak geri getir. Ücretsiz, açık kaynak ve görsellerin bilgisayarından hiç çıkmaz.",
+    "label": "Alt bilgi",
+    "product": "Ürün",
+    "project": "Proje",
+    "trust": "Güven",
+    "changelog": "Değişiklik günlüğü",
+    "releases": "Sürümler",
+    "issues": "Sorun bildir",
+    "security": "Güvenlik",
+    "license": "MIT lisansı",
+    "credit": "Ücretsiz ve açık kaynak. <a data-link='shades'>Shades Media Group</a> tarafından geliştirildi.",
+    "version": "Sürüm"
+  },
+  "home": {
+    "title": "Figma'dan görselleri ücretsiz sıkıştır ve dışa aktar | ImageRefold",
+    "description": "Katmanları WebP, AVIF, JPG ve PNG olarak dışa aktaran, kaydetmeden önce dosya boyutunu gösteren ve görselleri kendi bilgisayarında sıkıştıran ücretsiz, açık kaynak bir Figma eklentisi.",
+    "hero": {
+      "title": "Daha hafif görseller, doğrudan Figma'dan.",
+      "lead": "Herhangi bir katmanı WebP, AVIF, JPG ya da PNG olarak dışa aktar, kaydetmeden önce dosya boyutunu gör ve görselleri Figma'ya zaten sıkıştırılmış olarak geri getir. Ücretsiz, açık kaynak ve bilgisayarından hiçbir şey çıkmaz.",
+      "try": "Bir görselde dene",
+      "github": "GitHub'da takip et",
+      "note": "Figma eklentisi geliştirme aşamasında ve şimdilik kaynak koddan çalışıyor. Figma Community'ye ne zaman geldiğini öğrenmek için depoyu izle."
+    },
+    "try": {
+      "title": "Kendi görselinde dene.",
+      "text": "Bir resim ve bir format seç. Bu sayfa onu tarayıcında sıkıştırır; böylece boyutu ve kaliteyi yan yana görebilirsin. Hiçbir şey yüklenmez.",
+      "choose": "Bir görsel seç",
+      "drop": "ya da buraya bırak. PNG, JPG, WebP, AVIF veya GIF.",
+      "format": "Format",
+      "quality": "Kalite",
+      "before": "Orijinal",
+      "after": "Sonuç",
+      "saved": "Tasarruf",
+      "download": "Sonucu indir",
+      "note": "Bu sayfa tarayıcının kendi kodlayıcısını kullanır. Eklenti, daha küçük dosyalar üreten özel kodlayıcılar kullanır.",
+      "original": "Orijinal",
+      "result": "Sonuç",
+      "originalAlt": "Orijinal görsel",
+      "resultAlt": "Sıkıştırılmış görsel",
+      "compare": "Orijinali sonuçla karşılaştırmak için kaydır"
+    },
+    "features": {
+      "title": "Bir dışa aktarmanın ihtiyacı olan her şey.",
+      "text": "Katmanları seç, formatı seç, boyutu gör. Sonra hepsini tek seferde, projenin istediği şekilde adlandırarak dışa aktar.",
+      "formats": {
+        "title": "WebP, AVIF, JPG ve PNG",
+        "text": "Kayıplı ya da kayıpsız, her format için tek bir kalite kaydırıcısıyla."
+      },
+      "preview": {
+        "title": "Kaydetmeden önce boyut",
+        "text": "Her dosyanın boyutu ve kazancı; karşılaştırmak için orijinal, sonucun hemen yanında."
+      },
+      "scale": {
+        "title": "Her boyut tek seferde",
+        "text": "0.5×, 0.75×, 1×, 1.5×, 2×, 3×, 4× ya da tam bir genişlik; tek dışa aktarmada birkaçı birden."
+      },
+      "batch": {
+        "title": "Seçimin tamamı",
+        "text": "Seçili her çerçeve tek seferde; ayrı dosyalar ya da tek bir ZIP olarak, belirlediğin bir kalıba göre adlandırılır."
+      },
+      "import": {
+        "title": "İçeri alırken sıkıştırılmış",
+        "text": "Görselleri Figma'ya zaten hafiflemiş olarak bırak ya da ağır görsel dolgularını yerinde değiştir."
+      },
+      "file": {
+        "title": "Daha hafif bir Figma dosyası",
+        "text": "Gösterildiğinden büyük olan görseller, tek bir geri alma adımıyla daha hafif kopyalarla değiştirilir."
+      }
+    },
+    "privacy": {
+      "title": "Görsellerin bilgisayarında kalır.",
+      "text": "ImageRefold her görseli Figma'nın içinde, kendi makinende kodlar. Manifest dosyası hiçbir ağ erişimine izin vermez, bu yüzden her isteği Figma'nın kendisi engeller. Hesap yok, sunucu yok, analitik yok."
+    },
+    "open": {
+      "title": "Manifest dosyasına kadar açık kaynak.",
+      "text": "Her satır MIT lisansıyla GitHub'da. Kanıtı manifest dosyası: hiçbir alan adına izin vermez, yani hiçbir şey hiçbir yere gönderilemez.",
+      "github": "Kodu oku",
+      "codeLabel": "Hiçbir ağ erişimine izin vermeyen eklenti manifest dosyası"
+    },
+    "faq": {
+      "title": "Sorular ve cevaplar.",
+      "lead": "İlk görsellerini ImageRefold ile dışa aktarmadan önce insanların sordukları.",
+      "howto": {
+        "q": "Figma'dan sıkıştırılmış bir görseli nasıl dışa aktarırım?",
+        "name": "ImageRefold ile Figma'dan sıkıştırılmış bir görseli dışa aktar",
+        "intro": "ImageRefold eklentisini kurduktan sonra:",
+        "steps": {
+          "select": {
+            "name": "Katmanları seç",
+            "text": "Dışa aktarmak istediğin çerçeveleri, grupları ya da görselleri seç."
+          },
+          "choose": {
+            "name": "Formatı seç",
+            "text": "ImageRefold'u çalıştır; bir format, bir kalite ve ihtiyacın olan boyutları seç."
+          },
+          "export": {
+            "name": "Dışa aktar",
+            "text": "Her dosyanın boyutunu orijinaliyle karşılaştır, sonra dosyaları ya da bir ZIP'i dışa aktar."
+          }
+        }
+      },
+      "items": {
+        "free": {
+          "q": "ImageRefold gerçekten ücretsiz mi?",
+          "a": "Evet. Plan, sınır, deneme süresi, hesap ya da filigran yok ve hiçbir zaman olmayacak. ImageRefold, MIT lisansıyla açık kaynaktır."
+        },
+        "upload": {
+          "q": "Görsellerim bir yere yükleniyor mu?",
+          "a": "Hayır. Her görsel eklentinin içinde, bilgisayarında kodlanır. Eklenti hiçbir ağ erişimi olmadan geliştirildi; yani yanlışlıkla bile bir şey yükleyemez."
+        },
+        "formats": {
+          "q": "Hangi formatlarda dışa aktarır?",
+          "a": "WebP, AVIF, JPG ve PNG; kayıplı ya da kayıpsız. Saydamlık WebP, AVIF ve PNG'de korunur."
+        },
+        "file": {
+          "q": "Figma dosyamı küçültebilir mi?",
+          "a": "Evet. ImageRefold, dosyaya zaten yerleştirilmiş görselleri sıkıştırıp yerinde değiştirebilir; böylece dosya hafifler, tasarım aynı kalır."
+        },
+        "when": {
+          "q": "Ne zaman kurabilirim?",
+          "a": "Eklenti geliştirme aşamasında. İlk sürümün Figma Community'ye ne zaman geldiğini öğrenmek için <a data-link='repo'>GitHub deposunu</a> izle."
+        }
+      }
+    },
+    "install": {
+      "title": "ImageRefold'u al.",
+      "figma": "Figma eklentisi",
+      "figmaText": "Figma Community için geliştiriliyor. Ücretsiz, hesap gerektirmez.",
+      "figmaButton": "Sürümü takip et",
+      "github": "Kaynak kod",
+      "githubText": "Kodu oku, bir sorun bildir ya da bir özellik öner.",
+      "githubLink": "GitHub'da aç"
+    },
+    "runtime": {
+      "saved": "−{percent}",
+      "larger": "+{percent}",
+      "same": "Aynı boyut",
+      "caption": "{format} · kalite {quality}",
+      "lossless": "{format} · kayıpsız",
+      "error": "Bu tarayıcı o dosyayı okuyamadı. PNG, JPG ya da WebP dene."
+    }
+  },
+  "privacy": {
+    "title": "Gizlilik politikası | ImageRefold",
+    "description": "ImageRefold hiçbir kişisel veriyi toplamaz, iletmez, satmaz ya da paylaşmaz. Görsellerin bilgisayarında kodlanır ve asla yüklenmez.",
+    "heading": "Gizlilik politikası",
+    "updated": "Son güncelleme: 11 Ekim 2026",
+    "intro": "ImageRefold, Shades Media Group tarafından geliştirilen bir Figma eklentisidir. Bu politika eklentiyi ve bu web sitesini kapsar.",
+    "shortTitle": "Kısaca",
+    "short": "ImageRefold hiçbir kişisel veriyi toplamaz, iletmez, satmaz ya da paylaşmaz. Görsellerin bilgisayarından hiç çıkmaz.",
+    "pluginTitle": "Figma eklentisinin eriştikleri",
+    "pluginLayers": "<strong>Seçtiğin katmanlar</strong>, onları seçtiğin formatta görsel olarak dışa aktarmak için.",
+    "pluginImages": "<strong>Eklentiye bıraktığın ya da eklentide açtığın görseller</strong>, onları sıkıştırıp mevcut dosyaya yerleştirmek için.",
+    "pluginStorage": "<strong>Figma'nın eklenti depolaması</strong>, ayarlarını ve hazır ayarlarını hatırlamak için.",
+    "pluginNetwork": "Eklenti hiçbir ağ erişimi olmadan geliştirildi: manifest dosyası hiçbir alan adına izin vermez, bu yüzden Figma her isteği engeller. Kodlama, eklenti penceresinin içinde, kendi makinende çalışır.",
+    "siteTitle": "Bu web sitesi",
+    "site": "Web sitesi statiktir. Çerez kullanmaz; üçüncü taraf betik, yazı tipi ya da izleyici yüklemez. Sıkıştırma demosu tarayıcında çalışır ve seçtiğin görsel hiçbir yere gönderilmez. Seçtiğin görünüm tercihi tarayıcında kalır.",
+    "dataTitle": "Aldığımız veriler",
+    "data": "Hiçbiri. Hesap, analitik, çökme raporu ya da herhangi bir izleme yok.",
+    "childrenTitle": "Çocuklar",
+    "children": "ImageRefold bir tasarım aracıdır ve çocuklara yönelik değildir.",
+    "changesTitle": "Değişiklikler",
+    "changes": "Bu politikadaki değişiklikler bu sayfada yayınlanır ve <a data-link='changelog'>değişiklik günlüğünde</a> belirtilir.",
+    "contactTitle": "İletişim"
+  },
+  "prefs": {
+    "open": "Görünüm ve erişilebilirlik",
+    "title": "Görünüm",
+    "theme": "Tema",
+    "light": "Açık",
+    "dark": "Koyu",
+    "system": "Otomatik",
+    "access": "Erişilebilirlik",
+    "text": "Daha büyük metin",
+    "contrast": "Daha fazla kontrast",
+    "motion": "Hareketi azalt",
+    "links": "Bağlantıların altını çiz",
+    "reading": "Daha kolay okuma",
+    "saved": "Yalnızca bu tarayıcıya kaydedildi.",
+    "reset": "Sıfırla",
+    "close": "Kapat",
+    "privacy": "Gizlilik tercihleri"
+  },
+  "consent": {
+    "title": "Gizliliğin",
+    "text": "Bu site yalnızca çalışması için gerekenleri, örneğin görünüm ayarlarını saklar. Analiz veya pazarlama araçları ancak onay verirsen çalışır.",
+    "acceptAll": "Tümünü kabul et",
+    "necessaryOnly": "Yalnızca gerekli",
+    "customize": "Özelleştir",
+    "save": "Seçimleri kaydet",
+    "necessary": "Gerekli",
+    "necessaryText": "Görünüm ve gizlilik seçimlerini hatırlar. Her zaman açık.",
+    "analytics": "Analiz",
+    "analyticsText": "Neyin işe yaradığını görmek için anonim ziyaret sayımı. Şu an bu sitede kullanılmıyor.",
+    "marketing": "Pazarlama",
+    "marketingText": "Reklam ve kampanya ölçümü. Şu an bu sitede kullanılmıyor."
+  }
+}

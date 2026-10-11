@@ -1,0 +1,217 @@
+{
+  "language": "語言",
+  "imageAlt": "ImageRefold：更輕的圖片，直接從 Figma 匯出",
+  "preferred": {
+    "button": "新增為偏好來源<span class='visually-hidden'>（Google）</span>",
+    "mention": "想在 Google 搜尋中更常看到 ImageRefold？<a data-link='preferred' target='_blank'>將它新增為偏好來源</a>。"
+  },
+  "nav": {
+    "label": "主選單",
+    "home": "首頁",
+    "homeLabel": "ImageRefold 首頁",
+    "try": "試試看",
+    "features": "功能",
+    "privacy": "隱私",
+    "faq": "常見問題",
+    "cta": "免費安裝"
+  },
+  "footer": {
+    "top": "ImageRefold，回到頂端",
+    "tagline": "在 Figma 中壓縮並匯出圖片，匯入時圖片也已經變輕。免費、開源，圖片從不離開你的電腦。",
+    "label": "頁尾",
+    "product": "產品",
+    "project": "專案",
+    "trust": "信任",
+    "changelog": "更新紀錄",
+    "releases": "版本發布",
+    "issues": "回報問題",
+    "security": "安全性",
+    "license": "MIT 授權",
+    "credit": "免費且開源。由 <a data-link='shades'>Shades Media Group</a> 打造。",
+    "version": "版本"
+  },
+  "home": {
+    "title": "免費從 Figma 壓縮並匯出圖片 | ImageRefold",
+    "description": "免費開源的 Figma 外掛：將圖層匯出為 WebP、AVIF、JPG 和 PNG，存檔前顯示檔案大小，並在你自己的電腦上壓縮圖片。",
+    "hero": {
+      "title": "更輕的圖片，直接從 Figma 匯出。",
+      "lead": "將任何圖層匯出為 WebP、AVIF、JPG 或 PNG，存檔前就能看到檔案大小，匯入 Figma 的圖片也已經壓縮好。免費、開源，任何內容都不會離開你的電腦。",
+      "try": "用一張圖片試試看",
+      "github": "在 GitHub 上追蹤",
+      "note": "Figma 外掛仍在開發中，目前需從原始碼執行。追蹤這個儲存庫，第一時間知道它何時上架 Figma Community。"
+    },
+    "try": {
+      "title": "用你自己的圖片試試看。",
+      "text": "選擇一張圖片和一種格式。這個頁面會在你的瀏覽器中壓縮它，讓你並排比較大小和畫質。不會上傳任何內容。",
+      "choose": "選擇圖片",
+      "drop": "或拖放到這裡。支援 PNG、JPG、WebP、AVIF 或 GIF。",
+      "format": "格式",
+      "quality": "品質",
+      "before": "原圖",
+      "after": "結果",
+      "saved": "節省",
+      "download": "下載結果",
+      "note": "這個頁面使用瀏覽器內建的編碼器。外掛使用專用編碼器，產生的檔案更小。",
+      "original": "原圖",
+      "result": "結果",
+      "originalAlt": "原始圖片",
+      "resultAlt": "壓縮後的圖片",
+      "compare": "拖動以比較原圖與結果"
+    },
+    "features": {
+      "title": "匯出需要的，全都有。",
+      "text": "選圖層，選格式，看大小。接著依專案需要的方式命名，一次全部匯出。",
+      "formats": {
+        "title": "WebP、AVIF、JPG 和 PNG",
+        "text": "有損或無損，所有格式共用一個品質滑桿。"
+      },
+      "preview": {
+        "title": "存檔前就知道大小",
+        "text": "每個檔案的大小和節省幅度，原圖與結果並排比較。"
+      },
+      "scale": {
+        "title": "所有尺寸一次完成",
+        "text": "0.5×、0.75×、1×、1.5×、2×、3×、4× 或指定寬度，一次匯出多個。"
+      },
+      "batch": {
+        "title": "整個選取範圍",
+        "text": "所有選取的框架一次匯出，可以是個別檔案，也可以是一個 ZIP，依你設定的規則命名。"
+      },
+      "import": {
+        "title": "匯入時就壓縮",
+        "text": "把已經變輕的圖片直接拖進 Figma，或就地替換笨重的圖片填色。"
+      },
+      "file": {
+        "title": "更輕的 Figma 檔案",
+        "text": "比顯示尺寸還大的圖片會換成更輕的副本，一步就能復原。"
+      }
+    },
+    "privacy": {
+      "title": "你的圖片只留在你的電腦上。",
+      "text": "ImageRefold 在 Figma 裡、在你的電腦上編碼每一張圖片。它的資訊清單不允許任何網路存取，所以任何請求都會被 Figma 本身擋下。不用帳號，沒有伺服器，沒有分析工具。"
+    },
+    "open": {
+      "title": "開源，連資訊清單也公開。",
+      "text": "每一行程式碼都以 MIT 授權公開在 GitHub 上。資訊清單就是證明：它不允許任何網域，所以任何內容都無法傳送到任何地方。",
+      "github": "閱讀程式碼",
+      "codeLabel": "外掛的資訊清單，不允許任何網路存取"
+    },
+    "faq": {
+      "title": "常見問題，一次解答。",
+      "lead": "第一次用 ImageRefold 匯出圖片之前，大家最常問的問題。",
+      "howto": {
+        "q": "如何從 Figma 匯出壓縮後的圖片？",
+        "name": "用 ImageRefold 從 Figma 匯出壓縮後的圖片",
+        "intro": "安裝 ImageRefold 外掛後：",
+        "steps": {
+          "select": {
+            "name": "選取圖層",
+            "text": "選取你要匯出的框架、群組或圖片。"
+          },
+          "choose": {
+            "name": "選擇格式",
+            "text": "執行 ImageRefold，選擇格式、品質和需要的尺寸。"
+          },
+          "export": {
+            "name": "匯出",
+            "text": "比較每個檔案與原圖的大小，然後匯出檔案或一個 ZIP。"
+          }
+        }
+      },
+      "items": {
+        "free": {
+          "q": "ImageRefold 真的免費嗎？",
+          "a": "是的。沒有方案、限制、試用、帳號或浮水印，以後也不會有。ImageRefold 以 MIT 授權開源。"
+        },
+        "upload": {
+          "q": "我的圖片會被上傳到任何地方嗎？",
+          "a": "不會。每張圖片都在外掛裡、在你的電腦上編碼。外掛在設計上就沒有網路存取權限，所以就算出錯也無法上傳任何東西。"
+        },
+        "formats": {
+          "q": "可以匯出哪些格式？",
+          "a": "WebP、AVIF、JPG 和 PNG，有損或無損皆可。WebP、AVIF 和 PNG 會保留透明度。"
+        },
+        "file": {
+          "q": "它能讓我的 Figma 檔案變小嗎？",
+          "a": "可以。ImageRefold 能壓縮檔案中已經放好的圖片並就地替換，檔案變輕，設計維持不變。"
+        },
+        "when": {
+          "q": "什麼時候可以安裝？",
+          "a": "外掛仍在開發中。追蹤 <a data-link='repo'>GitHub 儲存庫</a>，第一時間知道首個版本何時上架 Figma Community。"
+        }
+      }
+    },
+    "install": {
+      "title": "取得 ImageRefold。",
+      "figma": "Figma 外掛",
+      "figmaText": "正在為 Figma Community 開發中。免費，不用帳號。",
+      "figmaButton": "追蹤發布消息",
+      "github": "原始碼",
+      "githubText": "閱讀程式碼、回報問題或建議新功能。",
+      "githubLink": "在 GitHub 上開啟"
+    },
+    "runtime": {
+      "saved": "−{percent}",
+      "larger": "+{percent}",
+      "same": "大小相同",
+      "caption": "{format} · 品質 {quality}",
+      "lossless": "{format} · 無損",
+      "error": "這個瀏覽器無法讀取該檔案。請試試 PNG、JPG 或 WebP。"
+    }
+  },
+  "privacy": {
+    "title": "隱私權政策 | ImageRefold",
+    "description": "ImageRefold 不會收集、傳送、出售或分享任何個人資料。你的圖片在你的電腦上編碼，從不上傳。",
+    "heading": "隱私權政策",
+    "updated": "最後更新：2026 年 10 月 11 日",
+    "intro": "ImageRefold 是由 Shades Media Group 製作的 Figma 外掛。本政策涵蓋這個外掛與本網站。",
+    "shortTitle": "簡短版本",
+    "short": "ImageRefold 不會收集、傳送、出售或分享任何個人資料。你的圖片從不離開你的電腦。",
+    "pluginTitle": "Figma 外掛會存取什麼",
+    "pluginLayers": "<strong>你選取的圖層</strong>，用來依你選擇的格式匯出為圖片。",
+    "pluginImages": "<strong>你拖入或在外掛中開啟的圖片</strong>，用來壓縮並放進目前的檔案。",
+    "pluginStorage": "<strong>Figma 的外掛儲存空間</strong>，用來記住你的設定和預設組合。",
+    "pluginNetwork": "外掛在設計上就沒有網路存取權限：它的資訊清單不允許任何網域，所以 Figma 會擋下所有請求。編碼在外掛視窗裡、在你的電腦上進行。",
+    "siteTitle": "本網站",
+    "site": "本網站是靜態網站。它不設定 Cookie，也不載入任何第三方指令碼、字型或追蹤器。壓縮示範在你的瀏覽器中執行，你選擇的圖片不會傳送到任何地方。你選擇的顯示偏好只保存在你的瀏覽器中。",
+    "dataTitle": "我們收到的資料",
+    "data": "沒有。沒有帳號、分析工具、當機報告，也沒有任何形式的追蹤。",
+    "childrenTitle": "兒童",
+    "children": "ImageRefold 是設計工具，並非以兒童為對象。",
+    "changesTitle": "政策變更",
+    "changes": "本政策的變更會公布在本頁，並記錄在<a data-link='changelog'>更新紀錄</a>中。",
+    "contactTitle": "聯絡我們"
+  },
+  "prefs": {
+    "open": "顯示與無障礙",
+    "title": "顯示",
+    "theme": "主題",
+    "light": "淺色",
+    "dark": "深色",
+    "system": "自動",
+    "access": "無障礙",
+    "text": "放大文字",
+    "contrast": "提高對比",
+    "motion": "減少動態",
+    "links": "連結加底線",
+    "reading": "更易閱讀",
+    "saved": "只儲存在這個瀏覽器中。",
+    "reset": "重設",
+    "close": "關閉",
+    "privacy": "隱私選項"
+  },
+  "consent": {
+    "title": "你的隱私",
+    "text": "本網站只保存運作所需的資訊，例如你的顯示設定。分析或行銷工具只有在你同意後才會執行。",
+    "acceptAll": "全部接受",
+    "necessaryOnly": "僅必要項目",
+    "customize": "自訂",
+    "save": "儲存選擇",
+    "necessary": "必要",
+    "necessaryText": "記住你的顯示與隱私選擇。永遠開啟。",
+    "analytics": "分析",
+    "analyticsText": "匿名統計造訪次數，了解哪些內容有幫助。本網站目前未使用。",
+    "marketing": "行銷",
+    "marketingText": "廣告與活動成效衡量。本網站目前未使用。"
+  }
+}

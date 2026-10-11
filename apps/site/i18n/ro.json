@@ -1,0 +1,217 @@
+{
+  "language": "Limba",
+  "imageAlt": "ImageRefold: imagini mai ușoare, direct din Figma",
+  "preferred": {
+    "button": "Adaugă la sursele preferate<span class='visually-hidden'> în Google</span>",
+    "mention": "Găsește ImageRefold mai des în căutarea Google: <a data-link='preferred' target='_blank'>adaugă-l la sursele preferate</a>."
+  },
+  "nav": {
+    "label": "Principal",
+    "home": "Acasă",
+    "homeLabel": "ImageRefold, pagina principală",
+    "try": "Încearcă",
+    "features": "Funcții",
+    "privacy": "Confidențialitate",
+    "faq": "Întrebări",
+    "cta": "Instalează"
+  },
+  "footer": {
+    "top": "ImageRefold, înapoi sus",
+    "tagline": "Comprimă și exportă imagini din Figma și adu-le înapoi deja ușoare. Gratuit, open source, iar imaginile tale nu pleacă niciodată de pe calculatorul tău.",
+    "label": "Subsol",
+    "product": "Produs",
+    "project": "Proiect",
+    "trust": "Încredere",
+    "changelog": "Istoricul schimbărilor",
+    "releases": "Versiuni",
+    "issues": "Raportează o problemă",
+    "security": "Securitate",
+    "license": "Licența MIT",
+    "credit": "Gratuit și open source. Creat de <a data-link='shades'>Shades Media Group</a>.",
+    "version": "Versiunea"
+  },
+  "home": {
+    "title": "Comprimă și exportă imagini din Figma, gratuit | ImageRefold",
+    "description": "Plugin Figma gratuit și open source: exportă straturi ca WebP, AVIF, JPG și PNG, arată mărimea înainte de salvare și comprimă imaginile pe calculatorul tău.",
+    "hero": {
+      "title": "Imagini mai ușoare, direct din Figma.",
+      "lead": "Exportă orice strat ca WebP, AVIF, JPG sau PNG, vezi mărimea fișierului înainte să salvezi și adu imaginile înapoi în Figma deja comprimate. Gratuit, open source și nimic nu pleacă de pe calculatorul tău.",
+      "try": "Încearcă pe o imagine",
+      "github": "Urmărește pe GitHub",
+      "note": "Pluginul Figma este în dezvoltare și deocamdată rulează din codul sursă. Urmărește repository-ul ca să afli când ajunge în Figma Community."
+    },
+    "try": {
+      "title": "Încearcă pe propria ta imagine.",
+      "text": "Alege o imagine și un format. Pagina o comprimă în browser, ca să vezi mărimea și calitatea una lângă alta. Nu se încarcă nimic.",
+      "choose": "Alege o imagine",
+      "drop": "sau trage una aici. PNG, JPG, WebP, AVIF sau GIF.",
+      "format": "Format",
+      "quality": "Calitate",
+      "before": "Original",
+      "after": "Rezultat",
+      "saved": "Economisit",
+      "download": "Descarcă rezultatul",
+      "note": "Pagina folosește encoderul propriu al browserului. Pluginul folosește encodere dedicate, care fac fișiere mai mici.",
+      "original": "Original",
+      "result": "Rezultat",
+      "originalAlt": "Imaginea originală",
+      "resultAlt": "Imaginea comprimată",
+      "compare": "Mută ca să compari originalul cu rezultatul"
+    },
+    "features": {
+      "title": "Tot ce îi trebuie unui export.",
+      "text": "Alege straturile, alege formatul, vezi mărimea. Apoi exportă-le pe toate deodată, cu numele de care are nevoie proiectul tău.",
+      "formats": {
+        "title": "WebP, AVIF, JPG și PNG",
+        "text": "Cu sau fără pierderi, cu un singur cursor de calitate pentru fiecare format."
+      },
+      "preview": {
+        "title": "Mărimea înainte de salvare",
+        "text": "Mărimea fiecărui fișier și cât economisești, cu originalul lângă rezultat ca să compari."
+      },
+      "scale": {
+        "title": "Toate mărimile deodată",
+        "text": "0.5×, 0.75×, 1×, 1.5×, 2×, 3×, 4× sau o lățime exactă, mai multe într-un singur export."
+      },
+      "batch": {
+        "title": "Selecții întregi",
+        "text": "Toate cadrele selectate dintr-odată, ca fișiere separate sau un singur ZIP, denumite după un tipar pe care îl alegi."
+      },
+      "import": {
+        "title": "Comprimate de la import",
+        "text": "Adu imagini în Figma deja ușoare sau înlocuiește pe loc umplerile cu imagine prea grele."
+      },
+      "file": {
+        "title": "Un fișier Figma mai ușor",
+        "text": "Imaginile mai mari decât sunt afișate sunt înlocuite cu copii mai ușoare, într-un singur pas de anulare."
+      }
+    },
+    "privacy": {
+      "title": "Imaginile tale rămân pe calculatorul tău.",
+      "text": "ImageRefold codifică fiecare imagine în Figma, pe calculatorul tău. Manifestul său nu permite deloc acces la rețea, așa că Figma însăși blochează orice cerere. Fără cont, fără server, fără analytics."
+    },
+    "open": {
+      "title": "Open source, până la manifest.",
+      "text": "Fiecare linie este pe GitHub, cu licență MIT. Manifestul e dovada: nu permite niciun domeniu, deci nimic nu poate fi trimis nicăieri.",
+      "github": "Citește codul",
+      "codeLabel": "Manifestul pluginului, care nu permite acces la rețea"
+    },
+    "faq": {
+      "title": "Întrebări și răspunsuri.",
+      "lead": "Ce se întreabă înainte de prima imagine exportată cu ImageRefold.",
+      "howto": {
+        "q": "Cum export o imagine comprimată din Figma?",
+        "name": "Exportă o imagine comprimată din Figma cu ImageRefold",
+        "intro": "Cu pluginul ImageRefold instalat:",
+        "steps": {
+          "select": {
+            "name": "Selectează straturile",
+            "text": "Selectează cadrele, grupurile sau imaginile pe care vrei să le exporți."
+          },
+          "choose": {
+            "name": "Alege formatul",
+            "text": "Pornește ImageRefold și alege un format, o calitate și mărimile de care ai nevoie."
+          },
+          "export": {
+            "name": "Exportă",
+            "text": "Compară mărimea fiecărui fișier cu originalul, apoi exportă fișierele sau un ZIP."
+          }
+        }
+      },
+      "items": {
+        "free": {
+          "q": "ImageRefold e cu adevărat gratuit?",
+          "a": "Da. Nu există abonamente, limite, perioade de probă, conturi sau watermark și nu vor exista niciodată. ImageRefold este open source, cu licență MIT."
+        },
+        "upload": {
+          "q": "Imaginile mele sunt încărcate undeva?",
+          "a": "Nu. Fiecare imagine este codificată în plugin, pe calculatorul tău. Pluginul este construit fără acces la rețea, așa că nu ar putea încărca nimic nici din greșeală."
+        },
+        "formats": {
+          "q": "În ce formate exportă?",
+          "a": "WebP, AVIF, JPG și PNG, cu sau fără pierderi. Transparența se păstrează în WebP, AVIF și PNG."
+        },
+        "file": {
+          "q": "Poate să-mi facă fișierul Figma mai mic?",
+          "a": "Da. ImageRefold poate comprima imaginile deja puse într-un fișier și le poate înlocui pe loc, așa că fișierul devine mai ușor, iar designul rămâne la fel."
+        },
+        "when": {
+          "q": "Când îl pot instala?",
+          "a": "Pluginul este în dezvoltare. Urmărește <a data-link='repo'>repository-ul GitHub</a> ca să afli când prima versiune ajunge în Figma Community."
+        }
+      }
+    },
+    "install": {
+      "title": "Obține ImageRefold.",
+      "figma": "Pluginul Figma",
+      "figmaText": "În dezvoltare pentru Figma Community. Gratuit, fără cont.",
+      "figmaButton": "Află când apare",
+      "github": "Codul sursă",
+      "githubText": "Citește codul, raportează o problemă sau propune o funcție.",
+      "githubLink": "Deschide pe GitHub"
+    },
+    "runtime": {
+      "saved": "−{percent}",
+      "larger": "+{percent}",
+      "same": "Aceeași mărime",
+      "caption": "{format} · calitate {quality}",
+      "lossless": "{format} · fără pierderi",
+      "error": "Browserul nu a putut citi acest fișier. Încearcă un PNG, JPG sau WebP."
+    }
+  },
+  "privacy": {
+    "title": "Politica de confidențialitate | ImageRefold",
+    "description": "ImageRefold nu colectează, nu transmite, nu vinde și nu partajează date personale. Imaginile sunt codificate pe calculatorul tău și nu sunt încărcate.",
+    "heading": "Politica de confidențialitate",
+    "updated": "Ultima actualizare: 11 octombrie 2026",
+    "intro": "ImageRefold este un plugin Figma creat de Shades Media Group. Această politică se aplică pluginului și acestui site.",
+    "shortTitle": "Pe scurt",
+    "short": "ImageRefold nu colectează, nu transmite, nu vinde și nu partajează date personale. Imaginile tale nu pleacă niciodată de pe calculatorul tău.",
+    "pluginTitle": "La ce are acces pluginul Figma",
+    "pluginLayers": "<strong>Straturile pe care le selectezi</strong>, ca să le exporte ca imagini în formatul ales.",
+    "pluginImages": "<strong>Imaginile pe care le tragi sau le deschizi în plugin</strong>, ca să le comprime și să le pună în fișierul curent.",
+    "pluginStorage": "<strong>Stocarea pentru pluginuri din Figma</strong>, ca să țină minte setările și preseturile tale.",
+    "pluginNetwork": "Pluginul este construit fără acces la rețea: manifestul său nu permite niciun domeniu, așa că Figma blochează orice cerere. Codificarea rulează în fereastra pluginului, pe calculatorul tău.",
+    "siteTitle": "Acest site",
+    "site": "Site-ul este static. Nu setează cookie-uri și nu încarcă scripturi, fonturi sau trackere de la terți. Demonstrația de compresie rulează în browser, iar imaginea pe care o alegi nu este trimisă nicăieri. O preferință de afișare pe care o alegi rămâne în browserul tău.",
+    "dataTitle": "Datele pe care le primim",
+    "data": "Niciunele. Nu există conturi, analytics, rapoarte de erori sau urmărire de niciun fel.",
+    "childrenTitle": "Copii",
+    "children": "ImageRefold este un instrument de design și nu se adresează copiilor.",
+    "changesTitle": "Modificări",
+    "changes": "Modificările acestei politici sunt publicate pe această pagină și notate în <a data-link='changelog'>istoricul schimbărilor</a>.",
+    "contactTitle": "Contact"
+  },
+  "prefs": {
+    "open": "Afișare și accesibilitate",
+    "title": "Afișare",
+    "theme": "Temă",
+    "light": "Luminoasă",
+    "dark": "Întunecată",
+    "system": "Auto",
+    "access": "Accesibilitate",
+    "text": "Text mai mare",
+    "contrast": "Contrast mai mare",
+    "motion": "Mai puține animații",
+    "links": "Linkuri subliniate",
+    "reading": "Citire mai ușoară",
+    "saved": "Salvat doar în acest browser.",
+    "reset": "Resetează",
+    "close": "Închide",
+    "privacy": "Opțiuni de confidențialitate"
+  },
+  "consent": {
+    "title": "Confidențialitatea ta",
+    "text": "Acest site păstrează doar ce îi trebuie ca să funcționeze, cum ar fi setările de afișare. Instrumentele de analiză sau marketing ar rula doar cu acordul tău.",
+    "acceptAll": "Accept tot",
+    "necessaryOnly": "Doar necesare",
+    "customize": "Personalizează",
+    "save": "Salvează alegerile",
+    "necessary": "Necesare",
+    "necessaryText": "Rețin alegerile tale de afișare și confidențialitate. Mereu active.",
+    "analytics": "Analiză",
+    "analyticsText": "Vizite numărate anonim, ca să aflăm ce ajută. Nefolosit pe acest site în prezent.",
+    "marketing": "Marketing",
+    "marketingText": "Reclame și măsurarea campaniilor. Nefolosit pe acest site în prezent."
+  }
+}
