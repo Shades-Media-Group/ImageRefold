@@ -1,0 +1,644 @@
+/*
+ * Shared controls, the same as PageRecast's, drawn in the grammar of a Figma inspector.
+ *
+ * Grid: 4 px steps, 32 px rows (24 px for read-only lists), 16 px gutter.
+ * Type: 11 px labels and meta, 12 px body and controls, 13 px row titles,
+ * 15 px the one title per screen.
+ */
+
+.ir-icon {
+  flex: none;
+  display: block;
+}
+
+/* Header: the logo, then the panel's own actions on the right. */
+.ir-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 8px 0 var(--pad);
+}
+.ir-header__actions {
+  display: flex;
+  align-items: center;
+}
+.ir-header .ir-icon-button[aria-pressed='true'] {
+  background: var(--hover);
+  color: var(--ink);
+}
+.ir-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+}
+
+/* Text tabs, or a title with a back arrow in their place. */
+.ir-tabs {
+  display: flex;
+  gap: 16px;
+  padding: 0 var(--pad);
+  border-bottom: 1px solid var(--line);
+}
+.ir-tabs button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-3);
+  font: 500 12px/1 var(--font);
+  cursor: pointer;
+}
+.ir-tabs button:hover {
+  color: var(--ink);
+}
+.ir-tabs button[aria-selected='true'] {
+  color: var(--ink);
+  font-weight: 600;
+}
+.ir-tabs button[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--ink);
+}
+
+/* Inspector sections: a 32 px title row, rows, 12 px to the next hairline. */
+.ir-section {
+  padding: 0 var(--pad) 12px;
+  border-top: 1px solid var(--line);
+}
+.ir-section--bare {
+  padding-top: 12px;
+}
+.ir-section:first-child {
+  border-top: 0;
+}
+.ir-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 32px;
+}
+.ir-section-head h2 {
+  font: 600 11px/16px var(--font);
+  color: var(--ink);
+}
+.ir-section-head > span {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.ir-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--row);
+}
+
+/* Property rows: an 11 px label column, then the control. */
+.ir-prop {
+  display: grid;
+  grid-template-columns: var(--prop-label) minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-height: var(--row);
+}
+/* A label too long for the column, such as the interface language, sets its own width. */
+.ir-prop--wide {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+.ir-prop > :first-child {
+  color: var(--ink-3);
+  font-size: 11px;
+}
+.ir-prop + .ir-prop {
+  margin-top: 0;
+}
+dl.ir-props {
+  margin: 0;
+}
+.ir-props .ir-prop {
+  min-height: 24px;
+}
+.ir-props dd {
+  margin: 0;
+  min-width: 0;
+}
+
+/* Read-only figures: label left, number right, 24 px apart. */
+.ir-stats {
+  margin: 0;
+}
+.ir-stats > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 24px;
+}
+.ir-stats dt {
+  min-width: 0;
+  color: var(--ink-2);
+}
+.ir-stats dd {
+  margin: 0;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.ir-stats dd.is-zero {
+  color: var(--ink-3);
+}
+
+/* Buttons */
+.ir-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--raised);
+  color: var(--ink);
+  font: 500 12px/1 var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--fast) var(--ease),
+    border-color var(--fast) var(--ease);
+}
+.ir-button:hover {
+  background: var(--hover);
+}
+.ir-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.ir-button--primary {
+  border-color: transparent;
+  background: var(--red);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+.ir-button--primary:hover {
+  background: var(--red-hover);
+}
+.ir-button--primary:active {
+  background: var(--red-press);
+}
+.ir-button--primary:disabled {
+  background: var(--hover);
+  color: var(--ink-3);
+  opacity: 1;
+}
+.ir-button--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink-2);
+}
+.ir-button--ghost:hover {
+  background: var(--hover);
+  color: var(--ink);
+}
+.ir-button--lg {
+  height: 36px;
+  font-size: 13px;
+}
+.ir-button--block {
+  width: 100%;
+}
+.ir-button kbd {
+  font: 500 11px/1 var(--font);
+  opacity: 0.72;
+}
+
+.ir-icon-button {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+.ir-icon-button:hover {
+  background: var(--hover);
+  color: var(--ink);
+}
+.ir-icon-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.ir-icon-button:disabled:hover {
+  background: transparent;
+  color: var(--ink-3);
+}
+
+/* Segmented control, Figma style: flat track, raised thumb. */
+.ir-segmented {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  height: 28px;
+  padding: 2px;
+  border-radius: var(--radius);
+  background: var(--hover);
+}
+.ir-segmented button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink-3);
+  font: 500 11px/1 var(--font);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ir-segmented button:hover {
+  color: var(--ink);
+}
+.ir-segmented button[aria-pressed='true'] {
+  background: var(--raised);
+  color: var(--ink);
+  box-shadow:
+    0 0 0 1px var(--line-strong),
+    0 1px 1px rgba(10, 10, 11, 0.06);
+}
+
+/* Toggle rows: label and its one-line effect, switch on the right. */
+.ir-toggle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  min-height: var(--row);
+  padding: 4px 0;
+  cursor: pointer;
+}
+.ir-toggle__label {
+  display: block;
+  color: var(--ink);
+  line-height: 16px;
+}
+.ir-toggle__hint {
+  display: block;
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 16px;
+}
+.ir-toggle input {
+  appearance: none;
+  position: relative;
+  flex: none;
+  width: 28px;
+  height: 16px;
+  margin: 0;
+  border-radius: 999px;
+  background: var(--line-strong);
+  cursor: pointer;
+  transition: background var(--fast) var(--ease);
+}
+.ir-toggle input::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--raised);
+  box-shadow: 0 1px 2px rgba(10, 10, 11, 0.3);
+  transition: transform var(--fast) var(--ease);
+}
+.ir-toggle input:checked {
+  background: var(--ink);
+}
+.ir-toggle input:checked::after {
+  transform: translateX(12px);
+  background: var(--bg);
+}
+
+/* Checkbox */
+.ir-check {
+  appearance: none;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--raised);
+  cursor: pointer;
+}
+.ir-check:checked {
+  border-color: var(--ink);
+  background: var(--ink)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z' fill='white'/%3E%3C/svg%3E")
+    center / 12px no-repeat;
+}
+:root.figma-dark .ir-check:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z' fill='%230e0e10'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.figma-light) .ir-check:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z' fill='%230e0e10'/%3E%3C/svg%3E");
+  }
+}
+
+/* Inputs */
+.ir-input {
+  height: 28px;
+  min-width: 0;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: var(--hover);
+  color: var(--ink);
+  font: 400 12px/1 var(--font);
+  font-variant-numeric: tabular-nums;
+}
+.ir-input:hover {
+  border-color: var(--line-strong);
+}
+.ir-input:focus-visible {
+  border-color: var(--ink);
+  background: var(--raised);
+  box-shadow: none;
+}
+.ir-input::placeholder {
+  color: var(--ink-3);
+}
+select.ir-input {
+  appearance: none;
+  padding-right: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0z' fill='%236e6d6b'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+/*
+ * A field with an icon inside on the left and an action inside on the
+ * right, the way Figma draws its property inputs.
+ */
+.ir-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.ir-field > .ir-icon {
+  position: absolute;
+  left: 8px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+.ir-field .ir-input {
+  flex: 1;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.ir-field .ir-icon-button {
+  position: absolute;
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+}
+.ir-field .ir-icon-button:not(:disabled) {
+  color: var(--ink);
+}
+
+.ir-textarea {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--raised);
+  color: var(--ink);
+  font:
+    400 12px/1.5 ui-monospace,
+    'SF Mono',
+    Menlo,
+    Consolas,
+    monospace;
+  resize: vertical;
+}
+.ir-textarea:focus-visible {
+  border-color: var(--ink);
+  box-shadow: none;
+}
+
+/* Messages: an inline line with a coloured glyph, not a tinted box. */
+.ir-message {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 16px;
+}
+.ir-message .ir-icon {
+  color: var(--ink-3);
+}
+.ir-message .ir-icon-button {
+  width: 24px;
+  height: 24px;
+  margin: -4px -4px 0 0;
+}
+.ir-message--success > .ir-icon {
+  color: var(--success);
+}
+.ir-message--warning > .ir-icon {
+  color: var(--warning);
+}
+.ir-message--error > .ir-icon {
+  color: var(--error);
+}
+.ir-message strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Progress */
+.ir-progress {
+  height: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+.ir-progress > div {
+  height: 100%;
+  background: var(--ink);
+  transform-origin: left center;
+  transition: transform 240ms var(--ease);
+}
+
+.ir-spinner {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  animation: ir-spin 0.7s linear infinite;
+}
+@keyframes ir-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ir-keycap {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--raised);
+  color: var(--ink);
+  font: 600 11px/1 var(--font);
+}
+
+/*
+ * The frames of a capture, side by side on one baseline like frames on a
+ * Figma canvas. Each tile is the top of that frame's own screenshot.
+ */
+.ir-lineup {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  min-height: 40px;
+}
+.ir-lineup__group {
+  flex: none;
+  min-width: 0;
+}
+.ir-lineup__tiles {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+.ir-lineup__tiles img,
+.ir-lineup__empty {
+  display: block;
+  flex: none;
+  border-radius: 2px;
+  object-fit: cover;
+  object-position: top center;
+  box-shadow: 0 0 0 1px var(--line-strong);
+  background: var(--raised);
+}
+.ir-lineup__empty--dark {
+  background: #0e0e10;
+}
+.ir-lineup__width {
+  margin-top: 8px;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+}
+.ir-lineup__theme {
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+/* The credit closes the scrolling area, at its bottom edge. */
+.credit {
+  margin-top: auto;
+  padding: 16px var(--pad);
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 16px;
+}
+.credit a {
+  color: var(--ink-2);
+}
+.hint {
+  margin-top: 4px;
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 16px;
+}
+.hint a {
+  color: var(--ink-2);
+}
+
+.text-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: 500 11px/16px var(--font);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.text-button:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Motion: state changes settle in; nothing performs on load. */
+@keyframes ir-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+@keyframes ir-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes ir-pop {
+  40% {
+    transform: scale(1.18);
+  }
+}
+.ir-message {
+  animation: ir-fade 200ms var(--ease) both;
+}
+.ir-lineup img,
+.stage img {
+  animation: ir-fade 320ms var(--ease) both;
+}
+.ir-button .ir-icon {
+  transition: transform var(--fast) var(--ease);
+}
+.ir-button[data-done] .ir-icon {
+  animation: ir-pop 320ms var(--ease);
+}
+.ir-button--primary:not(:disabled):active {
+  transform: scale(0.985);
+}
