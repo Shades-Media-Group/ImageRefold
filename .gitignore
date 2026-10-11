@@ -47,3 +47,13 @@ research/
 # Website pages, generated from apps/site/templates and apps/site/i18n by apps/site/pages.ts
 apps/site/index.html
 apps/site/privacy/
+apps/site/fr/
+apps/site/ro/
+apps/site/ru/
+apps/site/es/
+apps/site/it/
+apps/site/tr/
+apps/site/hi/
+apps/site/ja/
+apps/site/zh/
+apps/site/zh-hant/

@@ -20,12 +20,20 @@ const { version } = JSON.parse(readFileSync(join(root, '../../package.json'), 'u
   version: string
 }
 
-/**
- * The languages the site is written in. English is the default, at the root.
- * The other ten Shades languages (see PageRecast) are added once the plugin's
- * first release fixes the copy.
- */
-export const LOCALES = [{ code: 'en', lang: 'en', og: 'en_US', name: 'English' }] as const
+/** The languages the site is written in, the same eleven as every Shades site. English is the default, at the root. */
+export const LOCALES = [
+  { code: 'en', lang: 'en', og: 'en_US', name: 'English' },
+  { code: 'fr', lang: 'fr', og: 'fr_FR', name: 'Français' },
+  { code: 'ro', lang: 'ro', og: 'ro_RO', name: 'Română' },
+  { code: 'ru', lang: 'ru', og: 'ru_RU', name: 'Русский' },
+  { code: 'es', lang: 'es', og: 'es_ES', name: 'Español' },
+  { code: 'it', lang: 'it', og: 'it_IT', name: 'Italiano' },
+  { code: 'tr', lang: 'tr', og: 'tr_TR', name: 'Türkçe' },
+  { code: 'hi', lang: 'hi', og: 'hi_IN', name: 'हिन्दी' },
+  { code: 'ja', lang: 'ja', og: 'ja_JP', name: '日本語' },
+  { code: 'zh', lang: 'zh-Hans', og: 'zh_CN', name: '简体中文' },
+  { code: 'zh-hant', lang: 'zh-Hant', og: 'zh_TW', name: '繁體中文' },
+] as const
 type Locale = (typeof LOCALES)[number]
 
 export const PAGES = [

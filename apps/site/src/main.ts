@@ -1,4 +1,6 @@
 import '@fontsource-variable/hanken-grotesk/wght.css'
+// Cyrillic only in practice: Hanken Grotesk covers Latin first.
+import '@fontsource-variable/inter/wght.css'
 import './common.css'
 import './site.css'
 import 'shades-gradient/preferences.css'
@@ -34,6 +36,15 @@ for (const menu of document.querySelectorAll<HTMLDetailsElement>('details.lang')
     menu.querySelector('summary')?.focus()
   })
 }
+
+// Switching language keeps your place on the page.
+const keepHash = () => {
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('a[hreflang]')) {
+    if (a.host === location.host) a.hash = location.hash
+  }
+}
+keepHash()
+addEventListener('hashchange', keepHash)
 
 // Reveal chapters as they scroll into view.
 document.documentElement.classList.add('js')

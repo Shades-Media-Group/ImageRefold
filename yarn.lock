@@ -561,6 +561,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource-variable/hanken-grotesk/-/hanken-grotesk-5.3.0.tgz#9f4d3ac87244a44a578ce58c9ae8fab44df9357f"
   integrity sha512-DOd0FqL+3cH2dfNy0JtSq9tUfxBz5mLmHMjTU0DOr3E9Zo6wxuatCl53DIPNrSPgCsnuKyM739BTIG5glCLirw==
 
+"@fontsource-variable/inter@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/inter/-/inter-5.3.0.tgz#351dd1e02dab63a6cf66d57ec36dcfd10c07f07b"
+  integrity sha512-OupL48va4JNofb97w6NYeF9S7W/kHNKM0Er8Dem5nqi4jeOLrVJDoE8tZEpnMJmtkvNbB1EIPPwHcdkF6b1oUA==
+
 "@fontsource/space-grotesk@^5.3.0":
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/@fontsource/space-grotesk/-/space-grotesk-5.3.0.tgz#248f33358ba78cee84832832f7a79c77a096c7e0"

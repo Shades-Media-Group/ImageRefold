@@ -144,6 +144,7 @@ code {
 }
 .nav nav a,
 .nav-cta {
+  white-space: nowrap;
   color: var(--ink-2);
   text-decoration: none;
 }

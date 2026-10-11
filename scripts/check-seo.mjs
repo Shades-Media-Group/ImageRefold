@@ -10,7 +10,19 @@ import { fileURLToPath } from 'node:url'
 
 const SITE = 'https://imagerefold.shades.md'
 // Matches LOCALES in apps/site/pages.ts.
-const LANGS = { en: 'en' }
+const LANGS = {
+  en: 'en',
+  fr: 'fr',
+  ro: 'ro',
+  ru: 'ru',
+  es: 'es',
+  it: 'it',
+  tr: 'tr',
+  hi: 'hi',
+  ja: 'ja',
+  zh: 'zh-Hans',
+  'zh-hant': 'zh-Hant',
+}
 const HREFLANGS = [...Object.values(LANGS), 'x-default'].sort()
 // Products kept out of every public file are listed in the git-ignored research/banned.txt, one per line.
 const bannedFile = fileURLToPath(new URL('../research/banned.txt', import.meta.url))
