@@ -74,7 +74,7 @@
     "@jsquash/oxipng": "^2.3.0",
     "@jsquash/webp": "^1.5.0",
     "fflate": "^0.8.3",
-    "preact": "^10",
+    "preact": "^11",
     "shades-gradient": "https://github.com/Shades-Media-Group/gradient/releases/download/v0.4.0/shades-gradient-0.4.0.tgz"
   }
 }
