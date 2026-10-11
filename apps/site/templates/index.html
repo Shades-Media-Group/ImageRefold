@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="{{@lang}}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {{@head}}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="nav-logo" href="#top" aria-label="ImageRefold" data-logo></a>
+      <nav aria-label="{{nav.label}}">
+        <a href="#try">{{nav.try}}</a>
+        <a href="#features">{{nav.features}}</a>
+        <a href="#privacy">{{nav.privacy}}</a>
+        <a href="#faq">{{nav.faq}}</a>
+        <a data-link="repo">GitHub</a>
+      </nav>
+      {{@langs}}
+      <a class="nav-cta" href="#install">{{nav.cta}}</a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <h1>{{home.hero.title}}</h1>
+        <p class="hero-lead">{{home.hero.lead}}</p>
+        <p class="cta">
+          <a class="btn btn--primary" href="#try"
+            >{{home.hero.try}}<span class="btn-arrow" aria-hidden="true"></span
+          ></a>
+          <a class="btn btn--secondary" data-link="repo">{{home.hero.github}}</a>
+        </p>
+        <p class="cta-note">{{home.hero.note}}</p>
+      </section>
+
+      <section class="chapter try" id="try" data-try>
+        <div class="chapter-head" data-reveal>
+          <h2>{{home.try.title}}</h2>
+          <p>{{home.try.text}}</p>
+        </div>
+        <div class="try-body" data-reveal>
+          <div class="try-controls">
+            <label class="try-drop">
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/avif,image/gif"
+                data-try-file
+              />
+              <strong>{{home.try.choose}}</strong>
+              <span>{{home.try.drop}}</span>
+            </label>
+            <div class="try-row">
+              <span class="try-label" id="try-format">{{home.try.format}}</span>
+              <div class="seg" role="radiogroup" aria-labelledby="try-format" data-try-formats>
+                <button type="button" role="radio" aria-checked="true" data-format="image/webp">
+                  WebP
+                </button>
+                <button type="button" role="radio" aria-checked="false" data-format="image/jpeg">
+                  JPG
+                </button>
+                <button type="button" role="radio" aria-checked="false" data-format="image/png">
+                  PNG
+                </button>
+              </div>
+            </div>
+            <div class="try-row" data-try-quality-row>
+              <label class="try-label" for="try-quality">{{home.try.quality}}</label>
+              <input
+                id="try-quality"
+                type="range"
+                min="10"
+                max="100"
+                step="5"
+                value="80"
+                data-try-quality
+              />
+              <output class="g-num" for="try-quality" data-try-quality-value>80</output>
+            </div>
+            <dl class="try-result" aria-live="polite">
+              <div>
+                <dt>{{home.try.before}}</dt>
+                <dd class="g-num" data-try-before>—</dd>
+              </div>
+              <div>
+                <dt>{{home.try.after}}</dt>
+                <dd class="g-num" data-try-after>—</dd>
+              </div>
+              <div>
+                <dt>{{home.try.saved}}</dt>
+                <dd class="g-num" data-try-saved>—</dd>
+              </div>
+            </dl>
+            <a class="btn btn--dark btn--small" download data-try-download hidden
+              >{{home.try.download}}<span class="btn-arrow" aria-hidden="true"></span
+            ></a>
+            <p class="try-note">{{home.try.note}}</p>
+          </div>
+          <figure class="compare" data-try-compare>
+            <div class="compare-stage">
+              <img alt="{{home.try.originalAlt}}" data-try-original />
+              <div class="compare-after" data-try-after-wrap>
+                <img alt="{{home.try.resultAlt}}" data-try-result />
+              </div>
+              <input
+                class="compare-handle"
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                aria-label="{{home.try.compare}}"
+                data-try-split
+              />
+            </div>
+            <figcaption>
+              <span>{{home.try.original}}</span><span data-try-caption>{{home.try.result}}</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="chapter chapter--ink" id="features">
+        <div class="chapter-head" data-reveal>
+          <h2>{{home.features.title}}</h2>
+          <p>{{home.features.text}}</p>
+        </div>
+        <ul class="features" data-reveal>
+          <li>
+            <strong>{{home.features.formats.title}}</strong
+            ><span>{{home.features.formats.text}}</span>
+          </li>
+          <li>
+            <strong>{{home.features.preview.title}}</strong
+            ><span>{{home.features.preview.text}}</span>
+          </li>
+          <li>
+            <strong>{{home.features.scale.title}}</strong><span>{{home.features.scale.text}}</span>
+          </li>
+          <li>
+            <strong>{{home.features.batch.title}}</strong><span>{{home.features.batch.text}}</span>
+          </li>
+          <li>
+            <strong>{{home.features.import.title}}</strong
+            ><span>{{home.features.import.text}}</span>
+          </li>
+          <li>
+            <strong>{{home.features.file.title}}</strong><span>{{home.features.file.text}}</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="chapter chapter--red" id="privacy">
+        <h2 data-reveal>{{home.privacy.title}}</h2>
+        <p>{{home.privacy.text}}</p>
+      </section>
+
+      <section class="chapter chapter--open">
+        <div class="chapter-head" data-reveal>
+          <h2>{{home.open.title}}</h2>
+          <p>{{home.open.text}}</p>
+          <p class="cta cta--left">
+            <a class="btn btn--dark" data-link="repo"
+              >{{home.open.github}}<span class="btn-arrow" aria-hidden="true"></span
+            ></a>
+          </p>
+        </div>
+        <pre class="code" data-reveal aria-label="{{home.open.codeLabel}}"><code>{
+  <span class="k">"name"</span>: <span class="s">"ImageRefold"</span>,
+  <span class="k">"editorType"</span>: [<span class="s">"figma"</span>],
+  <span class="k">"networkAccess"</span>: {
+    <span class="k">"allowedDomains"</span>: [<span class="s">"none"</span>]
+  }
+}</code></pre>
+      </section>
+
+      <section class="chapter faq" id="faq">
+        <div class="chapter-head" data-reveal>
+          <h2>{{home.faq.title}}</h2>
+          <p>{{home.faq.lead}}</p>
+        </div>
+        {{@faq}}
+      </section>
+
+      <section class="install" id="install">
+        <h2>{{home.install.title}}</h2>
+        <div class="install-row" data-reveal>
+          <a class="install-item" data-link="figma">
+            <span class="tile tile--figma"
+              ><svg viewBox="0 0 38 57" aria-hidden="true">
+                <path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" />
+                <path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" />
+                <path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" />
+                <path
+                  fill="#f24e1e"
+                  d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"
+                />
+                <path
+                  fill="#a259ff"
+                  d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"
+                /></svg
+            ></span>
+            <strong>{{home.install.figma}}</strong>
+            <span class="install-text">{{home.install.figmaText}}</span>
+            <span class="btn btn--primary btn--small"
+              >{{home.install.figmaButton}}<span class="btn-arrow" aria-hidden="true"></span
+            ></span>
+          </a>
+          <a class="install-item" data-link="repo">
+            <span class="tile tile--github"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"
+                /></svg
+            ></span>
+            <strong>{{home.install.github}}</strong>
+            <span class="install-text">{{home.install.githubText}}</span>
+            <span class="link">{{home.install.githubLink}} <span aria-hidden="true">›</span></span>
+          </a>
+        </div>
+        <p class="install-note">{{preferred.mention}}</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="footer-logo" href="#top" aria-label="{{footer.top}}" data-logo></a>
+          <p>{{footer.tagline}}</p>
+          <a class="btn btn--primary btn--small" href="#try"
+            >{{home.hero.try}}<span class="btn-arrow" aria-hidden="true"></span
+          ></a>
+        </div>
+        <nav class="footer-cols" aria-label="{{footer.label}}">
+          <div>
+            <h3>{{footer.product}}</h3>
+            <ul>
+              <li><a data-link="figma">{{home.install.figma}}</a></li>
+              <li><a href="#try">{{nav.try}}</a></li>
+              <li><a href="#features">{{nav.features}}</a></li>
+              <li><a href="#faq">{{nav.faq}}</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>{{footer.project}}</h3>
+            <ul>
+              <li><a data-link="repo">GitHub</a></li>
+              <li><a data-link="changelog">{{footer.changelog}}</a></li>
+              <li><a data-link="releases">{{footer.releases}}</a></li>
+              <li><a data-link="issues">{{footer.issues}}</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>{{footer.trust}}</h3>
+            <ul>
+              <li><a href="{{@base}}privacy/">{{nav.privacy}}</a></li>
+              <li><a data-link="security">{{footer.security}}</a></li>
+              <li><a data-link="license">{{footer.license}}</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-extra">{{@langlist}} {{@preferred}}</div>
+      <div class="footer-base">
+        <p>{{footer.credit}}</p>
+        <p>
+          <a data-link="changelog">{{footer.version}} <span data-version></span></a> · © 2026
+        </p>
+      </div>
+      <a class="footer-mark" href="#top" aria-label="{{footer.top}}" data-wordmark></a>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

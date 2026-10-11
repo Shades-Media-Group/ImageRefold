@@ -1,0 +1,217 @@
+{
+  "language": "Language",
+  "imageAlt": "ImageRefold: lighter images, straight from Figma",
+  "preferred": {
+    "button": "Add to preferred sources<span class='visually-hidden'> on Google</span>",
+    "mention": "Find ImageRefold more often in Google Search: <a data-link='preferred' target='_blank'>add it as a preferred source</a>."
+  },
+  "nav": {
+    "label": "Main",
+    "home": "Home",
+    "homeLabel": "ImageRefold home",
+    "try": "Try it",
+    "features": "Features",
+    "privacy": "Privacy",
+    "faq": "Questions",
+    "cta": "Get ImageRefold"
+  },
+  "footer": {
+    "top": "ImageRefold, back to top",
+    "tagline": "Compress and export images from Figma, and bring them back in already light. Free, open source, and your images never leave your computer.",
+    "label": "Footer",
+    "product": "Product",
+    "project": "Project",
+    "trust": "Trust",
+    "changelog": "Changelog",
+    "releases": "Releases",
+    "issues": "Report an issue",
+    "security": "Security",
+    "license": "MIT licence",
+    "credit": "Free and open source. Built by <a data-link='shades'>Shades Media Group</a>.",
+    "version": "Version"
+  },
+  "home": {
+    "title": "Compress and export images from Figma, free | ImageRefold",
+    "description": "A free, open-source Figma plugin that exports layers as WebP, AVIF, JPG and PNG, shows the file size before you save, and compresses images on your own computer.",
+    "hero": {
+      "title": "Lighter images, straight from Figma.",
+      "lead": "Export any layer as WebP, AVIF, JPG or PNG, see the file size before you save, and bring images back into Figma already compressed. Free, open source, and nothing leaves your computer.",
+      "try": "Try it on an image",
+      "github": "Follow on GitHub",
+      "note": "The Figma plugin is in development. Watch the repository to hear when the first release is out."
+    },
+    "try": {
+      "title": "Try it on your own image.",
+      "text": "Choose a picture and a format. This page compresses it in your browser, so you can see the size and the quality side by side. Nothing is uploaded.",
+      "choose": "Choose an image",
+      "drop": "or drop one here. PNG, JPG, WebP, AVIF or GIF.",
+      "format": "Format",
+      "quality": "Quality",
+      "before": "Original",
+      "after": "Result",
+      "saved": "Saved",
+      "download": "Download the result",
+      "note": "This page uses your browser's own encoder. The plugin uses dedicated encoders that make smaller files.",
+      "original": "Original",
+      "result": "Result",
+      "originalAlt": "The original image",
+      "resultAlt": "The compressed image",
+      "compare": "Move to compare the original with the result"
+    },
+    "features": {
+      "title": "Everything an export needs.",
+      "text": "Pick the layers, pick the format, see the size. Then export them all at once, named the way your project needs.",
+      "formats": {
+        "title": "WebP, AVIF, JPG and PNG",
+        "text": "Lossy or lossless, with one quality control that means the same thing in every format."
+      },
+      "preview": {
+        "title": "The size before you save",
+        "text": "Each file's size and its saving, with the original beside the result to compare."
+      },
+      "scale": {
+        "title": "Every size at once",
+        "text": "0.5×, 1×, 2×, 3× or an exact width, several in one export."
+      },
+      "batch": {
+        "title": "Whole selections",
+        "text": "Every selected frame in one go, as separate files or one ZIP, named by a pattern you set."
+      },
+      "import": {
+        "title": "Compressed on the way in",
+        "text": "Drop images into Figma already light, or replace heavy image fills in place."
+      },
+      "file": {
+        "title": "Settings that stay",
+        "text": "Your formats and presets are remembered for each file."
+      }
+    },
+    "privacy": {
+      "title": "Your images stay on your computer.",
+      "text": "ImageRefold encodes every image inside Figma, on your machine. Its manifest allows no network access at all, so Figma itself blocks any request. No account, no server, no analytics."
+    },
+    "open": {
+      "title": "Open source, down to the manifest.",
+      "text": "Every line is on GitHub under the MIT licence. The manifest is the proof: it allows no domains, so nothing can be sent anywhere.",
+      "github": "Read the code",
+      "codeLabel": "The plugin manifest, which allows no network access"
+    },
+    "faq": {
+      "title": "Questions, answered.",
+      "lead": "What people ask before they export their first image with ImageRefold.",
+      "howto": {
+        "q": "How do I export a compressed image from Figma?",
+        "name": "Export a compressed image from Figma with ImageRefold",
+        "intro": "With the ImageRefold plugin installed:",
+        "steps": {
+          "select": {
+            "name": "Select the layers",
+            "text": "Select the frames, groups or images you want to export."
+          },
+          "choose": {
+            "name": "Choose the format",
+            "text": "Run ImageRefold and choose a format, a quality and the sizes you need."
+          },
+          "export": {
+            "name": "Export",
+            "text": "Check each file's size against the original, then export the files or a ZIP."
+          }
+        }
+      },
+      "items": {
+        "free": {
+          "q": "Is ImageRefold really free?",
+          "a": "Yes. There are no plans, limits, trials, accounts or watermarks, and there never will be. ImageRefold is open source under the MIT licence."
+        },
+        "upload": {
+          "q": "Are my images uploaded anywhere?",
+          "a": "No. Every image is encoded inside the plugin, on your computer. The plugin is built with no network access, so it could not upload anything even by mistake."
+        },
+        "formats": {
+          "q": "Which formats does it export?",
+          "a": "WebP, AVIF, JPG and PNG, lossy or lossless. Transparency is kept in WebP, AVIF and PNG."
+        },
+        "file": {
+          "q": "Can it make my Figma file smaller?",
+          "a": "Yes. ImageRefold can compress the images already placed in a file and swap them in place, so the file gets lighter and the design stays the same."
+        },
+        "when": {
+          "q": "When can I install it?",
+          "a": "The plugin is in development. Watch the <a data-link='repo'>GitHub repository</a> to hear when the first release reaches the Figma Community."
+        }
+      }
+    },
+    "install": {
+      "title": "Get ImageRefold.",
+      "figma": "Figma plugin",
+      "figmaText": "In development for the Figma Community. Free, with no account.",
+      "figmaButton": "Watch for the release",
+      "github": "Source code",
+      "githubText": "Read the code, report a problem or suggest a feature.",
+      "githubLink": "Open on GitHub"
+    },
+    "runtime": {
+      "saved": "−{percent}",
+      "larger": "+{percent}",
+      "same": "Same size",
+      "caption": "{format} · quality {quality}",
+      "lossless": "{format} · lossless",
+      "error": "This browser could not read that file. Try a PNG, JPG or WebP."
+    }
+  },
+  "privacy": {
+    "title": "Privacy policy | ImageRefold",
+    "description": "ImageRefold does not collect, transmit, sell or share any personal data. Your images are encoded on your computer and never uploaded.",
+    "heading": "Privacy policy",
+    "updated": "Last updated 11 October 2026",
+    "intro": "ImageRefold is a Figma plugin made by Shades Media Group. This policy covers the plugin and this website.",
+    "shortTitle": "The short version",
+    "short": "ImageRefold does not collect, transmit, sell or share any personal data. Your images never leave your computer.",
+    "pluginTitle": "What the Figma plugin accesses",
+    "pluginLayers": "<strong>The layers you select</strong>, to export them as images in the format you choose.",
+    "pluginImages": "<strong>Images you drop or open in the plugin</strong>, to compress them and place them in the current file.",
+    "pluginStorage": "<strong>Figma's plugin storage</strong>, to remember your settings and presets.",
+    "pluginNetwork": "The plugin is built with no network access: its manifest allows no domains, so Figma blocks any request. Encoding runs inside the plugin window, on your machine.",
+    "siteTitle": "This website",
+    "site": "The website is static. It sets no cookies and loads no third-party scripts, fonts or trackers. The compression demo runs in your browser, and the image you choose is never sent anywhere. A display preference you choose stays in your browser.",
+    "dataTitle": "Data we receive",
+    "data": "None. There are no accounts, analytics, crash reports or tracking of any kind.",
+    "childrenTitle": "Children",
+    "children": "ImageRefold is a design tool and is not directed at children.",
+    "changesTitle": "Changes",
+    "changes": "Changes to this policy are published on this page and noted in the <a data-link='changelog'>changelog</a>.",
+    "contactTitle": "Contact"
+  },
+  "prefs": {
+    "open": "Display and accessibility",
+    "title": "Display",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "Auto",
+    "access": "Accessibility",
+    "text": "Larger text",
+    "contrast": "More contrast",
+    "motion": "Reduce motion",
+    "links": "Underline links",
+    "reading": "Easier reading",
+    "saved": "Saved in this browser only.",
+    "reset": "Reset",
+    "close": "Close",
+    "privacy": "Privacy choices"
+  },
+  "consent": {
+    "title": "Your privacy",
+    "text": "This site keeps only what it needs to work, like your display settings. Analytics or marketing tools would run only with your yes.",
+    "acceptAll": "Accept all",
+    "necessaryOnly": "Only necessary",
+    "customize": "Customise",
+    "save": "Save choices",
+    "necessary": "Necessary",
+    "necessaryText": "Remembers your display and privacy choices. Always on.",
+    "analytics": "Analytics",
+    "analyticsText": "Anonymous visit counts, to learn what helps. Not in use on this site today.",
+    "marketing": "Marketing",
+    "marketingText": "Ads and campaign measurement. Not in use on this site today."
+  }
+}
