@@ -28,15 +28,40 @@ export const avifQuality = (quality: number) => Math.round((quality * 50) / 75)
 
 /** Sends work to the encoder worker and pairs each answer with its request. */
 export class Encoder {
-  private worker: Worker = new EncodeWorker()
+  private worker!: Worker
   private next = 0
   private pending = new Map<number, (result: EncodeResult) => void>()
 
   constructor() {
+    this.start()
+  }
+
+  private start() {
+    this.worker = new EncodeWorker()
     this.worker.onmessage = (event: MessageEvent<EncodeResult>) => {
       this.pending.get(event.data.id)?.(event.data)
       this.pending.delete(event.data.id)
     }
+    // A worker that dies (usually out of memory) answers nothing: fail what it held, start afresh.
+    this.worker.onerror = () => {
+      this.worker.terminate()
+      for (const [id, settle] of this.pending)
+        settle({
+          id,
+          error: 'The encoder ran out of memory on an image this large. Choose a smaller size.',
+        })
+      this.pending.clear()
+      this.start()
+    }
+  }
+
+  /** Drops every queued and running job (new settings made them stale) and starts a fresh worker. */
+  reset() {
+    if (!this.pending.size) return
+    this.worker.terminate()
+    for (const [id, settle] of this.pending) settle({ id, error: 'cancelled' })
+    this.pending.clear()
+    this.start()
   }
 
   encode(request: Omit<EncodeRequest, 'id'>) {

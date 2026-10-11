@@ -38,6 +38,29 @@ const codec = (name: string, factory: unknown, wasm: string) => {
   return cache.get(name)!
 }
 let oxipngReady: Promise<unknown> | undefined
+const WEBP_MAX = 16383
+/** About 8,000 × 8,000. Decoding needs 4 bytes a pixel, twice over; beyond this a worker can run out of memory. */
+const MAX_PIXELS = 64_000_000
+
+/** A PNG's size from its header, without decoding it. */
+function pngSize(bytes: Uint8Array) {
+  const png = bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47
+  if (!png || bytes.length < 24) return null
+  const view = new DataView(bytes.buffer, bytes.byteOffset, 24)
+  return { width: view.getUint32(16), height: view.getUint32(20) }
+}
+
+function checkSize(width: number, height: number, format: string) {
+  const megapixels = Math.round((width * height) / 1_000_000)
+  if (width * height > MAX_PIXELS)
+    throw new Error(
+      `This export is ${width} × ${height} px (${megapixels} megapixels); ImageRefold works up to 64. Choose a smaller size or an exact width.`,
+    )
+  if (format === 'webp' && Math.max(width, height) > WEBP_MAX)
+    throw new Error(
+      `WebP can't be larger than 16,383 px a side; this is ${width} × ${height}. Choose a smaller size, or JPG or PNG.`,
+    )
+}
 
 async function pixels(bytes: Uint8Array, maxWidth?: number, maxHeight?: number, flatten?: boolean) {
   const blob = new Blob([bytes as BlobPart])
@@ -77,11 +100,16 @@ async function encode(
   request: EncodeRequest,
 ): Promise<Extract<EncodeResult, { bytes: Uint8Array }>> {
   const { quality, lossless } = request
+  // Refuse what can't be encoded before spending memory on decoding it.
+  const header = pngSize(request.bytes)
+  if (header && request.maxWidth === undefined)
+    checkSize(header.width, header.height, request.format)
   let image = await pixels(request.bytes, request.maxWidth, request.maxHeight)
   const format: Format =
     request.format === 'figma' ? (hasAlpha(image.data) ? 'png' : 'jpeg') : request.format
   if (format === 'jpeg' && hasAlpha(image.data))
     image = await pixels(request.bytes, request.maxWidth, request.maxHeight, true)
+  checkSize(image.width, image.height, format)
   let out: Uint8Array
   switch (format) {
     case 'webp': {
@@ -100,8 +128,10 @@ async function encode(
       const options = lossless
         ? { quality: 100, qualityAlpha: -1, subsample: 3 }
         : { quality: avifQuality(quality) }
+      // Speed 7 of 10: about half the time of the reference encoder's 6, for a file a few percent larger.
       out = avif.encode(new Uint8Array(image.data.buffer) as never, image.width, image.height, {
         ...avifDefaults,
+        speed: 7,
         ...options,
       })
       break
@@ -118,6 +148,7 @@ async function encode(
       break
     }
   }
+  if (!out?.length) throw new Error(`The ${format.toUpperCase()} encoder returned an empty file.`)
   return {
     id: request.id,
     bytes: new Uint8Array(out),

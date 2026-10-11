@@ -28,11 +28,29 @@ const sendSelection = () => {
   send({ type: 'selection', layers: layersOf(selection), fillable: fillableOf(selection).length })
 }
 
+/** The most the window can encode; it says why when a size is over. Matches encode.worker.ts. */
+const MAX_PIXELS = 64_000_000
+
 async function render(job: number, ids: string[], sizes: Size[]) {
   for (const id of ids) {
     const node = await figma.getNodeByIdAsync(id)
-    if (!node || !('exportAsync' in node)) continue
+    if (!node || !('exportAsync' in node) || node.type === 'PAGE') continue
     for (const size of sizes) {
+      const scale = size.kind === 'scale' ? size.value : size.value / node.width
+      const width = Math.round(node.width * scale)
+      const height = Math.round(node.height * scale)
+      if (width * height > MAX_PIXELS) {
+        // Rendering this would take Figma a long time for a file the window must refuse.
+        const megapixels = Math.round((width * height) / 1_000_000)
+        send({
+          type: 'render-error',
+          job,
+          id,
+          size,
+          message: `This export is about ${width} × ${height} px (${megapixels} megapixels); ImageRefold works up to 64. Choose a smaller size or an exact width.`,
+        })
+        continue
+      }
       try {
         // Figma's lossless PNG is the source; the window encodes it into the chosen format.
         const png = await node.exportAsync({
