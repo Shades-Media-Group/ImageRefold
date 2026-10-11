@@ -105,8 +105,8 @@ export function App() {
   const fileInput = useRef<HTMLInputElement>(null)
   const settingsRef = useRef(settings)
   settingsRef.current = settings
-  const outputsRef = useRef(outputs)
-  outputsRef.current = outputs
+  /** Every PNG Figma has sent for the current selection, kept in step with the messages. */
+  const pngs = useRef(new Map<string, Uint8Array>())
 
   /** Saves a change; a function reads the latest settings, so quick clicks never undo each other. */
   const save = (next: Partial<Settings> | ((current: Settings) => Partial<Settings>)) => {
@@ -155,6 +155,7 @@ export function App() {
         case 'rendered': {
           if (message.job !== job.current) return
           const key = `${message.id}:${sizeToken(message.size)}`
+          pngs.current.set(key, message.png)
           setOutputs((all) => all.map((o) => (o.key === key ? { ...o, png: message.png } : o)))
           void encodeOne({ key, png: message.png }, encodeRun.current)
           break
@@ -189,8 +190,10 @@ export function App() {
   const sizes = useMemo(() => sizesOf(settings), [settings.scales, settings.width])
   useEffect(() => {
     if (tab !== 'export') return
+    // The job number keeps renders from an older selection out; encodes stay valid,
+    // since only a change of format or quality makes them stale.
     const id = ++job.current
-    encodeRun.current++
+    pngs.current = new Map()
     const next = layers.flatMap((layer) =>
       sizes.map((size) => ({ key: `${layer.id}:${sizeToken(size)}`, layer, size })),
     )
@@ -203,8 +206,12 @@ export function App() {
   useEffect(() => {
     const run = ++encodeRun.current
     const timer = setTimeout(() => {
-      for (const o of outputsRef.current) void encodeOne(o, run)
-      setOutputs((all) => all.map((o) => ({ ...o, result: undefined, error: undefined })))
+      // Clear, then encode every PNG received so far; any arriving later is encoded as it lands.
+      const ready = pngs.current
+      setOutputs((all) =>
+        all.map((o) => (ready.has(o.key) ? { ...o, result: undefined, error: undefined } : o)),
+      )
+      for (const [key, png] of ready) void encodeOne({ key, png }, run)
     }, 200)
     return () => clearTimeout(timer)
   }, [settings.format, settings.quality, settings.lossless])
