@@ -5,7 +5,9 @@ ImageRefold is a Figma plugin that compresses and exports images (WebP, AVIF, JP
 ## Commands
 
 ```bash
-yarn verify        # typecheck, lint, unit tests, site build and SEO check: before every commit
+yarn verify        # typecheck, lint, unit tests, plugin build, site build and SEO check: before every commit
+yarn dev:plugin    # rebuild the plugin on change
+yarn dev:harness   # the plugin window in a browser at /apps/figma-plugin/harness.html, Figma stood in
 yarn dev:site      # the website with live reload
 yarn deploy:site   # build, check, wrangler deploy to imagerefold.shades.md
 yarn brand         # regenerate every logo file from one geometry
@@ -18,7 +20,9 @@ Use Node 22: `export PATH=$HOME/.nvm/versions/node/v22.23.1/bin:$PATH`; the shel
 ## Non-negotiables
 
 - **Free forever:** no payments, plans, limits, accounts, watermarks or upgrade prompts anywhere.
-- **Nothing leaves the user's machine.** The plugin manifest allows no network domains. Encoders run in the plugin's UI iframe (WebAssembly, off the main thread). No analytics, no remote logging.
+- **Nothing leaves the user's machine.** The plugin manifest allows no network domains. Encoders run in a Web Worker in the plugin window, from WebAssembly embedded by `build.mjs` (`?base64` imports). No analytics, no remote logging.
+- **Never make it worse:** a PNG export is never larger than Figma's own PNG; Optimise swaps an image only when the new one is smaller.
+- **The UI kit is PageRecast's:** `apps/figma-plugin/src/ui/kit` copies its tokens, components and icons. Change them in both, or not at all.
 - **Credits:** in the product and its listing, "Free and open source. Built by Shades Media Group". In the README, "Built by Cristian Brinza | Shades Media Group".
 - **Never name or compare against other products in anything public:** README, docs, UI, site, commits, listings. Market research stays in `PLAN.md` and `research/`, both git-ignored. `research/banned.txt` lists names the site's SEO check rejects.
 - **Never invent proof:** no made-up savings, user counts, ratings or testimonials. Numbers on the site come from real encodes.

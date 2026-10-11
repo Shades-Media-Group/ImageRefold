@@ -22,15 +22,16 @@
   <a href="https://imagerefold.shades.md/privacy/"><b>Privacy</b></a>
 </p>
 
-> **In development.** The Figma plugin is being built in the open. Watch this repository to hear when the first release reaches the Figma Community.
+> **In development.** Version 0.1 of the Figma plugin works and can be run from source (below). Watch this repository to hear when the first release reaches the Figma Community.
 
 ## What it does
 
 - **Every format worth shipping:** WebP, AVIF, JPG and PNG, lossy or lossless, with one quality control that means the same thing in each.
 - **The size before you save:** each file's size and saving, with the original beside the result.
-- **Every size at once:** 0.5×, 1×, 2×, 3× or an exact width, several in one export.
+- **Every size at once:** 0.5×, 0.75×, 1×, 1.5×, 2×, 3×, 4× or an exact width, several in one export.
 - **Whole selections:** every selected frame in one go, as separate files or one ZIP, named by a pattern you set.
-- **Compressed on the way in:** drop images into Figma already light, or replace heavy image fills in place to slim a file.
+- **A lighter file:** finds images larger than they are shown and swaps in lighter copies, in one undo step.
+- **Compressed on the way in:** drop PNG, JPG, GIF, WebP or AVIF files into Figma already light, or use one as the fill of the selected layers.
 - **Free with no catch:** no account, no plan, no limits, no server.
 
 ## Privacy
@@ -49,9 +50,11 @@ Requires Node 22 (see `.nvmrc`) and Yarn 1.
 git clone https://github.com/Shades-Media-Group/ImageRefold.git
 cd ImageRefold
 yarn install
-yarn verify       # typecheck, lint, unit tests and the website build
-yarn dev:site     # the website with live reload
+yarn build        # apps/figma-plugin/dist
+yarn verify       # typecheck, lint, unit tests, plugin and website builds
 ```
+
+In Figma desktop choose **Plugins → Development → Import plugin from manifest** and pick `apps/figma-plugin/manifest.json`.
 
 | Command            | What it does                                               |
 | ------------------ | ---------------------------------------------------------- |
