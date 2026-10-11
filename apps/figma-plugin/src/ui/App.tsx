@@ -131,8 +131,9 @@ export function App() {
         all.map((o) => (o.key === output.key ? { ...o, result: smaller, error: undefined } : o)),
       )
     } catch (error) {
-      if (run !== encodeRun.current) return
       const message = error instanceof Error ? error.message : String(error)
+      // A job the reset dropped is encoded again with the new settings.
+      if (run !== encodeRun.current || message === 'cancelled') return
       setOutputs((all) => all.map((o) => (o.key === output.key ? { ...o, error: message } : o)))
     }
   }
@@ -206,7 +207,9 @@ export function App() {
   useEffect(() => {
     const run = ++encodeRun.current
     const timer = setTimeout(() => {
-      // Clear, then encode every PNG received so far; any arriving later is encoded as it lands.
+      // Stop work for the old settings, clear, then encode every PNG received so far;
+      // any arriving later is encoded as it lands.
+      encoder.reset()
       const ready = pngs.current
       setOutputs((all) =>
         all.map((o) => (ready.has(o.key) ? { ...o, result: undefined, error: undefined } : o)),
@@ -505,11 +508,13 @@ export function App() {
           <Button variant="primary" size="lg" block disabled={!done.length} onClick={runExport}>
             {pending
               ? `Encoding ${outputs.length - pending} of ${outputs.length}`
-              : done.length === 1
-                ? `Download ${names[outputs.indexOf(done[0]!)]!.split('/').pop()} · ${formatBytes(totalAfter)}`
-                : settings.zip
-                  ? `Download ZIP of ${done.length} · ${formatBytes(totalAfter)}`
-                  : `Download ${done.length} files · ${formatBytes(totalAfter)}`}
+              : !done.length
+                ? 'Nothing to export'
+                : done.length === 1
+                  ? `Download ${names[outputs.indexOf(done[0]!)]!.split('/').pop()} · ${formatBytes(totalAfter)}`
+                  : settings.zip
+                    ? `Download ZIP of ${done.length} · ${formatBytes(totalAfter)}`
+                    : `Download ${done.length} files · ${formatBytes(totalAfter)}`}
           </Button>
         </footer>
       ) : tab === 'optimise' && scan?.images.length ? (
@@ -592,7 +597,8 @@ function ExportView({
         title="Files"
         aside={
           <span class="num">
-            {outputs.length} · {formatBytes(totals.after)}
+            {outputs.length}
+            {totals.after > 0 && ` · ${formatBytes(totals.after)}`}
             {totals.before > 0 && !totals.pending && ` · ${saving(totals.before, totals.after)}`}
           </span>
         }
@@ -753,7 +759,13 @@ function Preview({ output, format }: { output?: Output; format: Format }) {
   return (
     <>
       <div class={`preview preview--${zoom}`}>
-        {url ? <img src={url} alt="" /> : <span class="ir-spinner muted" />}
+        {url ? (
+          <img src={url} alt="" />
+        ) : output?.error ? (
+          <p class="muted">No preview: this file could not be made.</p>
+        ) : (
+          <span class="ir-spinner muted" />
+        )}
       </div>
       <div class="preview-bar">
         <span class="muted num truncate">
