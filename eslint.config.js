@@ -4,7 +4,15 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    ignores: ['**/dist', '**/release', 'coverage', 'graphify-out', '.claude', 'test-results'],
+    ignores: [
+      '**/dist',
+      '**/release',
+      'coverage',
+      'graphify-out',
+      '.claude',
+      'test-results',
+      'research',
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
