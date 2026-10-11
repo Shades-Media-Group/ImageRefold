@@ -22,6 +22,7 @@
     "lint": "eslint . --cache",
     "test": "vitest run",
     "brand": "node scripts/brand.mjs",
+    "assets": "node scripts/assets.mjs",
     "dev:site": "yarn --cwd apps/site dev",
     "build:site": "yarn --cwd apps/site build",
     "deploy:site": "yarn --cwd apps/site deploy",

@@ -48,14 +48,15 @@ const bandPath = ({ s, r }, next) => {
 }
 
 // inkFill: the smallest size, which turns to paper on dark grounds.
-export function markShapes({ inkFill = color.ink, mono } = {}) {
+// redFill: the largest, which turns to paper on a red ground.
+export function markShapes({ inkFill = color.ink, redFill = color.red, mono } = {}) {
   if (mono) {
     // One colour: each size becomes an L-shaped band, with a gap before the next.
     return `<path fill="${mono}" d="${sizes.map((size, i) => (sizes[i + 1] ? bandPath(size, sizes[i + 1]) : squarePath(size))).join('')}"/>`
   }
   return sizes
     .map((size) => {
-      const fill = size.fill === 'ink' ? inkFill : color[size.fill]
+      const fill = { red: redFill, rose: color.rose, ink: inkFill }[size.fill]
       return `<path fill="${fill}" d="${squarePath(size)}"/>`
     })
     .join('')
