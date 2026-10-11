@@ -10,7 +10,7 @@ The first release, with the Shades Media Group account. Every field below is cop
 
 ## 1. Get the plugin's ID (once)
 
-The manifest carries a placeholder id (`imagerefold-dev`). Figma issues the permanent one:
+The manifest carries the permanent Community ID `1691223547839147813`. For a fresh fork, Figma issues a new one:
 
 1. In Figma desktop, **Plugins → Development → New plugin…**, choose **Figma design**, name it **ImageRefold**, and save it anywhere.
 2. Copy the `id` from the generated `manifest.json`.

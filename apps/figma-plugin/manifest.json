@@ -1,6 +1,6 @@
 {
-  "name": "ImageRefold",
-  "id": "imagerefold-dev",
+  "name": "ImageRefold — Compress & Export WebP, AVIF, JPG, PNG",
+  "id": "1691223547839147813",
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/ui.html",
