@@ -734,9 +734,10 @@ function ExportView({
   )
 }
 
-/** The chosen file at 100%, on the stage. Hold Compare to see Figma's original. */
+/** The chosen file on the stage, whole or at 100%. Hold Compare to see Figma's original. */
 function Preview({ output, format }: { output?: Output; format: Format }) {
   const [original, setOriginal] = useState(false)
+  const [zoom, setZoom] = useState<'fit' | 'actual'>('fit')
   const bytes = original ? output?.png : output?.result?.bytes
   const url = useMemo(
     () =>
@@ -751,14 +752,23 @@ function Preview({ output, format }: { output?: Output; format: Format }) {
   const hold = (on: boolean) => () => setOriginal(on)
   return (
     <>
-      <div class="preview">
+      <div class={`preview preview--${zoom}`}>
         {url ? <img src={url} alt="" /> : <span class="ir-spinner muted" />}
       </div>
       <div class="preview-bar">
-        <span class="muted num">
-          {original ? 'Original PNG' : 'Result'}
-          {output?.result && ` · ${output.result.width} × ${output.result.height} px · 100%`}
+        <span class="muted num truncate">
+          {original ? 'Original' : 'Result'}
+          {output?.result && ` · ${output.result.width} × ${output.result.height}`}
         </span>
+        <Segmented
+          label="Zoom"
+          value={zoom}
+          options={[
+            { value: 'fit', label: 'Fit' },
+            { value: 'actual', label: '100%' },
+          ]}
+          onChange={setZoom}
+        />
         <button
           type="button"
           class="text-button"
@@ -769,7 +779,7 @@ function Preview({ output, format }: { output?: Output; format: Format }) {
           onKeyDown={(e) => e.key === ' ' && setOriginal(true)}
           onKeyUp={hold(false)}
         >
-          Hold to compare
+          Compare
         </button>
       </div>
     </>

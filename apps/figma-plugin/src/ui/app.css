@@ -155,12 +155,26 @@ body,
 .preview-bar + .ir-section {
   border-top: 0;
 }
-/* At 100%: the file at its real pixel size, scrolling both ways when larger than the stage. */
+/* Fit: the whole file, centred. 100%: its real pixels, scrolling both ways. */
 .preview {
+  display: grid;
+  place-items: center;
   overflow: auto;
 }
-.preview img {
+.preview--fit img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+.preview--actual {
+  place-items: start;
+}
+.preview--actual img {
   max-width: none;
+}
+.preview-bar .text-button {
+  flex: none;
 }
 .preview .ir-spinner {
   margin: 96px auto 0;
