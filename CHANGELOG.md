@@ -8,4 +8,11 @@ All notable changes to ImageRefold are recorded here. The format follows
 
 ### Added
 
+- **Settings** behind the gear: theme (Light, Dark or Automatic), file names, one ZIP or separate files, lossless WebP and AVIF, and Reset all preferences. Every choice is remembered between runs.
+- **Typed sizes:** besides 1×, 2× and 3×, type any scale or width, such as `0.5x, 1200`.
 - The repository: licence, contributing, security, support and privacy guides, CI and issue forms.
+
+### Changed
+
+- **A simpler panel.** One screen per tab: the file on the stage, its size, Format, Quality and Size rows, the files, and one Download button. Hold the preview to see the original.
+- **Light by default**, whatever Figma's theme; dark is a choice in Settings.

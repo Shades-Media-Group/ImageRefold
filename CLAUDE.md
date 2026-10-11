@@ -22,7 +22,8 @@ Use Node 22: `export PATH=$HOME/.nvm/versions/node/v22.23.1/bin:$PATH`; the shel
 - **Free forever:** no payments, plans, limits, accounts, watermarks or upgrade prompts anywhere.
 - **Nothing leaves the user's machine.** The plugin manifest allows no network domains. Encoders run in a Web Worker in the plugin window, from WebAssembly embedded by `build.mjs` (`?base64` imports). No analytics, no remote logging.
 - **Never make it worse:** a PNG export is never larger than Figma's own PNG; Optimise swaps an image only when the new one is smaller.
-- **The UI kit is PageRecast's:** `apps/figma-plugin/src/ui/kit` copies its tokens, components and icons. Change them in both, or not at all.
+- **The UI kit is PageRecast's:** `apps/figma-plugin/src/ui/kit` copies its tokens, components and icons. `src/ui/app.css` layers Gradient's pill controls over it for this panel. Kit changes go to both plugins, or neither.
+- **Light by default:** `data-theme` on `<html>` is `light`, `dark` or `auto` (follows Figma's `figma-dark` class), chosen in Settings and saved with the other preferences. Same values and labels as PageRecast.
 - **Credits:** in the product and its listing, "Free and open source. Built by Shades Media Group". In the README, "Built by Cristian Brinza | Shades Media Group".
 - **Never name or compare against other products in anything public:** README, docs, UI, site, commits, listings. Market research stays in `PLAN.md` and `research/`, both git-ignored. `research/banned.txt` lists names the site's SEO check rejects.
 - **Never invent proof:** no made-up savings, user counts, ratings or testimonials. Numbers on the site come from real encodes.
