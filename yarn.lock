@@ -2070,9 +2070,9 @@ semver@^7.7.3, semver@^7.8.5:
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.8.5.tgz#39b646037dd50c14fb451e7e4cac58ed8b863f69"
   integrity sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==
 
-"shades-gradient@https://github.com/Shades-Media-Group/gradient/releases/download/v0.9.2/shades-gradient-0.9.2.tgz":
-  version "0.9.2"
-  resolved "https://github.com/Shades-Media-Group/gradient/releases/download/v0.9.2/shades-gradient-0.9.2.tgz#885a9fb0bb1d1a9dc27498019456a8b23752cb17"
+"shades-gradient@https://github.com/Shades-Media-Group/gradient/releases/download/v0.9.3/shades-gradient-0.9.3.tgz":
+  version "0.9.3"
+  resolved "https://github.com/Shades-Media-Group/gradient/releases/download/v0.9.3/shades-gradient-0.9.3.tgz#54372cabd7ab78a17f85c73bc79a47a2bf346797"
 
 sharp@0.35.5:
   version "0.35.5"
